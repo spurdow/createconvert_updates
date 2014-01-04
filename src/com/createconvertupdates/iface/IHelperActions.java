@@ -12,15 +12,17 @@ public interface IHelperActions<T> {
 	public long add(T object);
 	
 	/**
-	 * 
 	 * get Object from the table
-	 * @param <E>
+	 * @param id
+	 * @return
 	 */
 	public T get(long id);
 	
 	/**
-	 *  update object from the table
-	 * @param <T>
+	 * update object from the table
+	 * @param id
+	 * @param object
+	 * @return
 	 */
 	public boolean update(long id , T object);
 	
@@ -28,13 +30,13 @@ public interface IHelperActions<T> {
 	 * note: should never used , never to delete data from database
 	 * removes data from the database
 	 * @param id
+	 * @param object
 	 * @return
 	 */
 	public T delete(long id , T object);
-	
 	/**
-	 *  get all objects from the table
-	 * @param <E>
+	 * get all objects from the table
+	 * @return
 	 */
 	public List<T> getAll();
 	
