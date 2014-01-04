@@ -3,11 +3,9 @@ package com.createconvertupdates.adapters;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 /**
  *  An abstract implementatio of list adapter to be used by all adapters
