@@ -51,6 +51,13 @@ public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
     	int w = imageView.getWidth();
     	int h = imageView.getHeight();
     	
+    	
+    	/*
+    	 *  creating bitmap fonts that require width and height needs values
+    	 *  for width and height greater than zero
+    	 *  well fetch imageView width and height but this is asynchronous task
+    	 *  depends if the imageview is already null we have to make sure
+    	 */
     	if(w < 1){
     		w = default_wh;
     	}
