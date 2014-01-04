@@ -56,7 +56,7 @@ public class Utilities {
 	/**
 	 *  php folder for the current site
 	 */
-	public final static String PHP_FOLDER = "createconvert_updates/";
+	public final static String PHP_FOLDER = "createconvert_updates_server/";
 	
 	/**
 	 *  PROPERTY REGISTRATION ID
