@@ -12,8 +12,8 @@ public interface IHelperActions<T> {
 	public long add(T object);
 	
 	/**
-	 * 	note : should never used
-	 *  remove Object from the table
+	 * 
+	 * get Object from the table
 	 * @param <E>
 	 */
 	public T get(long id);
@@ -25,7 +25,8 @@ public interface IHelperActions<T> {
 	public boolean update(long id , T object);
 	
 	/**
-	 * 	removes data from the database
+	 * note: should never used , never to delete data from database
+	 * removes data from the database
 	 * @param id
 	 * @return
 	 */
