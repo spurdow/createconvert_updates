@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+  
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#FFFFBB33"
+        android:contentDescription="Login"
+        android:scaleType="center"
+        android:src="@drawable/ic_launcher" />
+
+    <EditText
+        android:id="@+id/txt_uname"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:hint="@string/str_uname"
+        android:inputType="textEmailAddress"
+        android:padding="10sp"
+        android:singleLine="true"
+        android:text="@string/null_val" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/txt_uname_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/null_val"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FF0000" />
+
+    <EditText
+        android:id="@+id/txt_password_login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="@string/string_password"
+        android:inputType="textPassword"
+        android:padding="10sp"
+        android:text="@string/null_val" >
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/txt_password_login_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/null_val"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FF0000" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:paddingTop="10dp" >
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn_seagull"
+            android:text="@string/string_login"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/custom_btn_orange"
+            android:text="@string/string_cancel" />
+    </RelativeLayout>
+
+</LinearLayout>

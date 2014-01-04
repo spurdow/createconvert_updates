@@ -1,0 +1,158 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    <!-- Action Bar Button Styles -->
+    <style name="ActionBarButton">
+    	<item name="android:layout_width">wrap_content</item>
+   	 	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:background">@null</item>
+    	<item name="android:ellipsize">end</item>
+    	<item name="android:singleLine">true</item>
+    	<item name="android:textSize">@dimen/text_size_small</item>
+	</style>
+	
+	<style name="ActionBarButtonWhite" parent="@style/ActionBarButton">
+	    <item name="android:textColor">@color/white</item>
+	</style>
+	
+	<style name="ActionBarButtonOffWhite" parent="@style/ActionBarButton">
+	    <item name="android:textColor">@color/off_white</item>
+	</style>
+	<!-- end of Action Bar Button STyles -->
+ 
+    <!-- Custom Button Orange -->
+	<style name="btnStyleOrange" parent="@android:style/Widget.Button">
+	       <item name="android:textSize">15sp</item>
+	       <item name="android:textStyle">bold</item>
+	       <item name="android:textColor">#FFFFFF</item>
+	       <item name="android:gravity">center</item>
+	       <item name="android:shadowColor">#000000</item>
+	       <item name="android:shadowDx">1</item>
+	       <item name="android:shadowDy">1</item>
+	       <item name="android:shadowRadius">0.6</item>
+	       <item name="android:background">@drawable/custom_btn_orange</item>
+	       <item name="android:padding">10dip</item>
+	</style>
+	
+	<!-- Custom Button Seagull -->
+	<style name="btnStyleSeagull" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#626954</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_seagull</item>
+       <item name="android:padding">10dip</item>
+    </style>
+    <!--  Custom Button Sandrift -->
+    <style name="btnStyleSandrift" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FFFFFF</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_sandrift</item>
+       <item name="android:padding">10dip</item>
+  	</style>
+  	<!--  Custom Button Genoa -->
+  	<style name="btnStyleGenoa" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FFFFFF</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_genoa</item>
+       <item name="android:padding">10dip</item>
+    </style>
+    <!--  Custom Button Arsenic -->
+   	<style name="btnStyleArsenic" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FFFFFF</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_arsenic</item>
+       <item name="android:padding">10dip</item>
+    </style>
+    <!--  Custom Button Breakbay -->
+ 	<style name="btnStyleBreakerBay" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FFFFFF</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_breakerbay</item>
+       <item name="android:padding">10dip</item>
+    </style>
+    <!--  Custom Button Shaksepeare -->
+   	<style name="btnStyleShakespeare" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FFFFFF</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_shakespeare</item>
+       <item name="android:padding">10dip</item>
+   	</style>
+   	<!--  Custom button Biege -->
+   	<style name="btnStyleBeige" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#5d6153</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_biege</item>
+       <item name="android:padding">10dip</item>
+    </style>
+    <!--  Custom button blackpearl -->
+	<style name="btnStyleBlackpearl" parent="@android:style/Widget.Button">
+       <item name="android:textSize">15sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FFFFFF</item>
+       <item name="android:gravity">center</item>
+       <item name="android:shadowColor">#000000</item>
+       <item name="android:shadowDx">1</item>
+       <item name="android:shadowDy">1</item>
+       <item name="android:shadowRadius">0.6</item>
+       <item name="android:background">@drawable/custom_btn_blackpearl</item>
+       <item name="android:padding">10dip</item>
+    </style>
+
+</resources>
