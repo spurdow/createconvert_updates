@@ -25,7 +25,7 @@ import com.createconvertupdates.entities.Project;
 
 public class ProjectListingFragment extends SherlockFragment {
 
-	private static final String TAG = "ProjectFragment";
+	private static final String TAG = "ProjectListingFragment";
 	
 	private ProjectListAdapter adapter;
 	

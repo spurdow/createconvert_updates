@@ -1285,13 +1285,14 @@ containing a value of this type.
         public static final int list_layout=0x7f030018;
         public static final int login_layout=0x7f030019;
         public static final int message_page=0x7f03001a;
-        public static final int project_metadata_per_list_layout=0x7f03001b;
-        public static final int project_page=0x7f03001c;
-        public static final int project_per_list_layout=0x7f03001d;
-        public static final int register_layout=0x7f03001e;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001f;
-        public static final int sherlock_spinner_item=0x7f030020;
-        public static final int update_page=0x7f030021;
+        public static final int project_header_layout=0x7f03001b;
+        public static final int project_metadata_per_list_layout=0x7f03001c;
+        public static final int project_page=0x7f03001d;
+        public static final int project_per_list_layout=0x7f03001e;
+        public static final int register_layout=0x7f03001f;
+        public static final int sherlock_spinner_dropdown_item=0x7f030020;
+        public static final int sherlock_spinner_item=0x7f030021;
+        public static final int update_page=0x7f030022;
     }
     public static final class menu {
         public static final int home_page_menu=0x7f0b0000;
