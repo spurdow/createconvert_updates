@@ -46,30 +46,18 @@ public class ProjectListingFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		ListView listView = (ListView) getView().findViewById(R.id.id_listview);
 		
-		ProjectHelper projectHelper = new ProjectHelper(getActivity());
-		
-		
-		
+		ProjectHelper projectHelper = new ProjectHelper(getActivity());		
 		
 		List<Project> projects = projectHelper.getAll();
-		
-		for(Project p : projects){
-			projectHelper.delete(p.getId(), p);
-		}
-
-		projects.clear();
 		
 		adapter = new ProjectListAdapter(getActivity() , projects);
 		
 		listView.setAdapter(adapter);
 		
 		mreceiver = new UpdateReceiver(adapter);
-	
 		
 		projectHelper.close();
-		
-
-		
+				
 		super.onActivityCreated(savedInstanceState);
 	}
 	
@@ -78,7 +66,7 @@ public class ProjectListingFragment extends SherlockFragment {
 	public void onPause() {
 		// TODO Auto-generated method stub
 		/*
-		 *  register a update reciever
+		 *  register and update reciever
 		 */
 		LocalBroadcastManager.getInstance(this.getActivity()).unregisterReceiver(mreceiver);
 		super.onPause();

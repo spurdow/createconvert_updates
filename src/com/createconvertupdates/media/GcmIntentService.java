@@ -1,11 +1,16 @@
 package com.createconvertupdates.media;
 
+import java.util.List;
+
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.ProjectHelper;
+import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
+import com.createconvertupdates.entities.ProjectMetaData;
 import com.createconvertupdates.media.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,7 +28,6 @@ import static com.createconvertupdates.commons.Utilities.*;
 
 public class GcmIntentService extends IntentService {
 	private static final String TAG = "GcmIntentService";
-    public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
 
@@ -98,7 +102,9 @@ public class GcmIntentService extends IntentService {
 				generateProjectTableNotification(extras , notification_id);
 			break;
 		case Utilities.MESSAGE_NOTIFICATION: break;
-		case Utilities.PROJECT_METADATA_NOTIFICATION: break;
+		case Utilities.PROJECT_METADATA_NOTIFICATION: 
+				generateProjectUpdatesNotification(extras , notification_id);
+			break;
 		default: break;
 		}
 	}
@@ -106,15 +112,31 @@ public class GcmIntentService extends IntentService {
 	/*
 	 *  generate project table notifications
 	 */
+	@SuppressLint("DefaultLocale")
 	private void generateProjectTableNotification(Bundle extras , int notification_id){
    		if(Boolean.valueOf(extras.getString("notify"))){
     		ProjectHelper helper = new ProjectHelper(this.getApplicationContext());
+    		List<Project> projects = helper.getAll();
+    		helper.close();
+    		String name = extras.getString("name").trim();
+    		
+    		for(Project p : projects){
+    			/**
+    			 *  project already added 
+    			 *  no insertion of database and no notification
+    			 */
+    			if(p.getName().toLowerCase().equals(name.toLowerCase())){
+    				Log.d(TAG, "has been inserted already " + p.getName());
+    				return;
+    			}
+    		}
+    		
     		Project project = new Project();
     		project.setId(Integer.parseInt(extras.getString("id")));
     		project.setName(extras.getString("name"));
     		project.setImagePath(extras.getString("image"));
     		project.setSlogan(extras.getString("slogan"));
-    		project.setDate(extras.getString("date"));
+    		project.setDate(extras.getString("date_created"));
     		project.setStatus(Integer.parseInt(extras.getString("status")));
     		long id = helper.add(project);
     		Log.d(TAG, helper.getAll().size() + "");
@@ -135,15 +157,49 @@ public class GcmIntentService extends IntentService {
     		 */
             final NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-            .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
+            //.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
+            .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle("Create Convert Media ltd.")
-            .setContentText("Project " + project.getName() + " added successfully!");
-            
-            
+            .setContentText("Project " + project.getName().toUpperCase() + " added successfully!");
             
             mBuilder.setContentIntent(contentIntent);
             mNotificationManager.notify(notification_id, mBuilder.build());
    		}
+	}
+	
+	private void generateProjectUpdatesNotification(Bundle extras , int notification_id){
+		if(Boolean.valueOf(extras.getString("notify"))){
+			/**
+			 *  add the project meta data to database 
+			 */
+			ProjectMetaDataHelper helper = new ProjectMetaDataHelper(getApplicationContext());
+						
+			ProjectMetaData pmd = new ProjectMetaData();
+			pmd.setProject_id(Integer.parseInt(extras.getString("project_id")));
+			pmd.setUpdate_message(extras.getString("update_message"));
+			pmd.setDate_received(extras.getString("date_received"));
+			pmd.setStatus(Integer.parseInt(extras.getString("status")));
+			
+			long id = helper.add(pmd);
+			helper.close();
+			
+			Intent intent = new Intent(this , ProjectFragment.class);
+    		intent.putExtra("id", id);
+    		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+			
+    		/*
+    		 *  notification side
+    		 */
+            final NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(this)
+            //.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle("Create Convert Media ltd.")
+            .setContentText(extras.getString("message") + " added successfully!");
+            
+            mBuilder.setContentIntent(contentIntent);
+            mNotificationManager.notify(notification_id, mBuilder.build());
+		}
 	}
 	
     

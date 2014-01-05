@@ -1,11 +1,15 @@
 package com.createconvertupdates.media;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.createconvertupdates.dbentities.ProjectHelper;
+import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
+import com.createconvertupdates.entities.ProjectMetaData;
 
 public class ProjectFragment extends SherlockFragmentActivity{
 
@@ -28,6 +32,12 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		ProjectHelper pHelper = new ProjectHelper(this);
 		
 		Project project = pHelper.get(id);
+		
+		pHelper.close();
+		
+		ProjectMetaDataHelper pmdHelper = new ProjectMetaDataHelper(this);
+		
+		List<ProjectMetaData> pmdLists = pmdHelper.getAll();
 		
 		
 		
