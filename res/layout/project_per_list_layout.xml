@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/h_name"
         android:layout_below="@+id/h_name"
-        android:maxLength="50"
+        android:maxLength="18"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

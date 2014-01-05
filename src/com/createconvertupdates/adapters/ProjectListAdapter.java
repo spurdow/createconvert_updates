@@ -90,7 +90,7 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 	@Override
 	public void add(Project e) {
 		// TODO Auto-generated method stub
-		getList().add(e);
+		getList().add(0 ,e);
 		notifyDataSetChanged();
 	}
 
