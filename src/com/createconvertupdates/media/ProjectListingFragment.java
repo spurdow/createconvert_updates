@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -23,15 +25,16 @@ import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Project;
 
-public class ProjectListingFragment extends SherlockFragment {
+public class ProjectListingFragment extends SherlockFragment implements OnItemClickListener {
 
 	private static final String TAG = "ProjectListingFragment";
 	
 	private ProjectListAdapter adapter;
 	
-	
 	private UpdateReceiver mreceiver;
 
+	private ListView listView;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class ProjectListingFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		ListView listView = (ListView) getView().findViewById(R.id.id_listview);
+		listView = (ListView) getView().findViewById(R.id.id_listview);
 		
 		ProjectHelper projectHelper = new ProjectHelper(getActivity());		
 		
@@ -57,6 +60,8 @@ public class ProjectListingFragment extends SherlockFragment {
 		mreceiver = new UpdateReceiver(adapter);
 		
 		projectHelper.close();
+		
+		listView.setOnItemClickListener(this);
 				
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -113,6 +118,19 @@ public class ProjectListingFragment extends SherlockFragment {
 			adapter.add(helper.get(id));
 			
 		}
+		
+	}
+
+
+
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+		// TODO Auto-generated method stub
+		long p_id  = adapter.getList().get(pos).getId();
+		Intent i = new Intent(this.getActivity() , ProjectFragment.class);
+		i.putExtra("project_id", p_id);
+		startActivity(i);
 		
 	}
 

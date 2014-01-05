@@ -15,7 +15,7 @@ import com.createconvertupdates.iface.IHelperActions;
 import static com.createconvertupdates.commons.Utilities.*;
 
 
-public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperActions<ProjectMetaData>{
+public class ProjectMetaDataHelper implements IHelperActions<ProjectMetaData>{
 
 	public final static String TABLE_NAME = "project_metadata_table";	
 	
@@ -25,9 +25,9 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 	private final static String FIELD_DATE = "date_received";
 	private final static String FIELD_STATUS = "status";
 	
-	private final static String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+	public final static String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 	
-	private final static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + 
+	public final static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + 
 			" ( " + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
 			FIELD_PROJECT_ID + " INTEGER ," +
 			FIELD_UPDATE_MESSAGE + " TEXT ," +
@@ -36,31 +36,18 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 			"FOREIGN KEY  ( " + FIELD_PROJECT_ID + " ) REFERENCES " + ProjectHelper.TABLE_NAME + " ( " + ProjectHelper.FIELD_ID +" ));";
 	
 	
+	private DBHelper databaseHelper;
+	
 	public ProjectMetaDataHelper(Context context) {
-		super(context, DB_NAME, null, DB_VERSION);
-		// TODO Auto-generated constructor stub
+		databaseHelper = new DBHelper(context);
 	}
 
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
-		db.execSQL(CREATE_TABLE);
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		db.execSQL(DROP_TABLE);
-		onCreate(db);
-	}
-	
-	
 
 	@Override
 	public long add(ProjectMetaData object) {
 		// TODO Auto-generated method stub
 		
-		SQLiteDatabase db = getWritableDatabase();
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		
 		long id = -1;
 		
@@ -80,7 +67,7 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 		// TODO Auto-generated method stub
 		ProjectMetaData projectmetadata = new ProjectMetaData();
 		
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		
 		String selectQuery = "SELECT * FROM " +TABLE_NAME +" WHERE " + FIELD_ID + " = ?" ;
 		
@@ -102,7 +89,7 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 	@Override
 	public boolean update(long id, ProjectMetaData object) {
 		// TODO Auto-generated method stub
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		int affected_rows = 0;
 		
 		ContentValues values = new ContentValues();
@@ -122,7 +109,7 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 	@Override
 	public ProjectMetaData delete(long id, ProjectMetaData object) {
 		// TODO Auto-generated method stub
-		SQLiteDatabase db = getWritableDatabase();
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		
 		int affected_rows = db.delete(TABLE_NAME, FIELD_ID + " = ?", new String[]{String.valueOf(id)});
 		
@@ -132,7 +119,7 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 	@Override
 	public List<ProjectMetaData> getAll() {
 		// TODO Auto-generated method stub
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		List<ProjectMetaData> list = new ArrayList<ProjectMetaData>();
 		
 		String sql = "SELECT * FROM " + TABLE_NAME;
@@ -156,6 +143,10 @@ public class ProjectMetaDataHelper extends SQLiteOpenHelper implements IHelperAc
 		
 		return list;
 		
+	}
+	
+	public void close(){
+		databaseHelper.close();
 	}
 
 

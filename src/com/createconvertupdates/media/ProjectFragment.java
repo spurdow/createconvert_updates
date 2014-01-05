@@ -11,6 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
@@ -25,6 +26,7 @@ public class ProjectFragment extends SherlockFragmentActivity{
 	public static final String TAG = "ProjectFragment";
 	private ListView listView;
 	private UpdateReceiver mreceiver;
+	private ActionBar mBar;
 	
 	
 	@Override
@@ -39,9 +41,11 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		
 		
 		
-		int id = extras.getInt("project_id");
+		long id = extras.getLong("project_id");
 		
 		ProjectHelper pHelper = new ProjectHelper(this);
+		
+		
 		
 		Project project = pHelper.get(id);
 		
@@ -50,6 +54,7 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		ProjectMetaDataHelper pmdHelper = new ProjectMetaDataHelper(this);
 		
 		List<ProjectMetaData> pmdLists = pmdHelper.getAll();
+
 		
 		ProjectMetaDataAdapter adapter= new ProjectMetaDataAdapter(this , pmdLists);
 		
@@ -58,7 +63,9 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		listView.setAdapter(adapter);
 		
 		
+		mBar = getSupportActionBar();
 		
+		mBar.setTitle(project.getName());
 	}
 
 	@Override

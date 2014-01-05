@@ -18,7 +18,7 @@ import android.util.Log;
 
 import static com.createconvertupdates.commons.Utilities.*;
 
-public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Project>{
+public class ProjectHelper implements IHelperActions<Project>{
 
 	private final static String TAG = "ProjectHelper";
 	
@@ -33,7 +33,7 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 	
 	public final static String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 	
-	private final static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + 
+	public final static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + 
 			" ( " + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," + 
 			FIELD_NAME + " TEXT , " +
 			FIELD_IMAGE + " TEXT , " +
@@ -41,25 +41,14 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 			FIELD_DATE + "  TEXT," +
 			FIELD_STATUS + " INTEGER ) ";
 	
+	private DBHelper databaseHelper;
+	
 	public ProjectHelper(Context context) {
-		super(context, DB_NAME , null , DB_VERSION);
-		// TODO Auto-generated constructor stub
+		databaseHelper = new DBHelper(context);
 	}
 
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
-		db.execSQL(CREATE_TABLE);
-	}
 
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		db.execSQL(DROP_TABLE);
-		
-		onCreate(db);
-		
-	}
+
 
 	@Override
 	public long add(Project p) {
@@ -68,7 +57,7 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 		/*
 		 *  get sqlite database reference
 		 */
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
 		long id = -1;
 		
@@ -100,7 +89,7 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 		// TODO Auto-generated method stub
 		Project p = new Project();
 		
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + FIELD_ID 
 				+ " = ?";
@@ -124,7 +113,7 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 	@Override
 	public boolean update(long id, Project object) {
 		// TODO Auto-generated method stub
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		int affected_rows = 0;
 		
 			
@@ -149,7 +138,7 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 	public List<Project> getAll() {
 		// TODO Auto-generated method stub
 		
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		
 		List<Project> projects = new ArrayList<Project>();
 		
@@ -177,12 +166,17 @@ public class ProjectHelper extends SQLiteOpenHelper implements IHelperActions<Pr
 	public Project delete(long id  , Project project) {
 		// TODO Auto-generated method stub
 		
-		SQLiteDatabase db = getWritableDatabase();
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
 		int r = db.delete(TABLE_NAME, FIELD_ID + " = ?", new String[]{String.valueOf(id)});
 		
 		
 		return (r > 0 )? project : null;
+	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		databaseHelper.close();
 	}
 
 
