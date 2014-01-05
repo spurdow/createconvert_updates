@@ -80,8 +80,16 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 		 *  if our instance state is not null
 		 *  then retrieve our last position from the viewpager
 		 */
-		if(arg0 != null)
+		if(arg0 != null){
 			mViewPager.setCurrentItem(arg0.getInt("state"));
+			/*
+			 *  if tag projects extras exists 
+			 *  then we remove the notification count
+			 */
+			if(arg0.getInt(TAG_PROJECTS, -1) != -1){
+				removeNotificationCount(this, arg0.getInt(TAG_PROJECTS), TAG_PROJECTS);
+			}
+		}
 		
 		/*
 		 * instantiate fragment manager for viewpager adapter to use

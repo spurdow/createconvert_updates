@@ -111,7 +111,7 @@ public class GCMRegIDTask extends AsyncTask<Void , Void , String>{
 				Utilities.savePreferences(context, customer);
 			}else if(tag_result.trim().equals("error")){
 				HomeFragmentActivity a = (HomeFragmentActivity) context;
-				//a.finish();
+				removeSavedCustomer(context);
 				Intent i = new Intent(a , SplashActivity.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.putExtra("activity_change", 0 );

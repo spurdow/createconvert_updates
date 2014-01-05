@@ -88,6 +88,7 @@ public class Utilities {
 	public final static String TAG_PROJECT_UPDATES = "Projects_Updates";
 	public final static String TAG_MESSAGES = "Messages";
 	
+	
 	/**
 	 *  Notification ID's
 	 */
@@ -144,6 +145,30 @@ public class Utilities {
 	        }
 	    }
 	    return null;
+	}
+	/**
+	 *  get no. of notifications
+	 */
+	public static void removeNotificationCount(Context context , int notification_id , String notif_tags){
+		SharedPreferences shared = getPreferences(context);		
+		SharedPreferences.Editor editor = shared.edit();
+		editor.remove(notif_tags + "" + notification_id);
+		
+	}
+	
+	/**
+	 *  save no. of notifications
+	 */
+	public static int saveNotificationCount(Context context , int notification_id , String notif_tags){
+		SharedPreferences shared = getPreferences(context);
+		SharedPreferences.Editor editor = shared.edit();
+		int count = shared.getInt(notif_tags + "" + notification_id, 0);
+
+		editor.putInt(notif_tags+""+notification_id, ++count);
+		
+		editor.commit();
+		
+		return count;
 	}
 	
 	/**

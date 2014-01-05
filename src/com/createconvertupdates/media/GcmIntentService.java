@@ -149,9 +149,20 @@ public class GcmIntentService extends IntentService {
     		LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     		
     		Intent intent = new Intent(this , HomeFragmentActivity.class);
+    		intent.putExtra(TAG_PROJECTS,notification_id);
     		intent.putExtra("state", 1);
     		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
     		
+    		/*
+    		 *  save and get the count of notification 
+    		 */
+    		int count = saveNotificationCount(getApplicationContext() , notification_id , TAG_PROJECTS);
+    		String contentText = "";
+    		if(count > 0){
+    			contentText = "New Projects Added!";
+    		}else{
+    			contentText = "Project " + project.getName().toUpperCase() + " added successfully!";
+    		}
     		/*
     		 *  notification side
     		 */
@@ -160,7 +171,8 @@ public class GcmIntentService extends IntentService {
             //.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
             .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle("Create Convert Media ltd.")
-            .setContentText("Project " + project.getName().toUpperCase() + " added successfully!");
+            .setNumber(count)
+            .setContentText(contentText);
             
             mBuilder.setContentIntent(contentIntent);
             mNotificationManager.notify(notification_id, mBuilder.build());
@@ -194,14 +206,23 @@ public class GcmIntentService extends IntentService {
     		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
     		
     		/*
+    		 *  get the project
+    		 */
+    		ProjectHelper projectHelper = new ProjectHelper(getApplicationContext());
+    		//Project getProject = projectHelper.get(pmd.)
+    		projectHelper.close();
+    		/*
     		 *  notification side
     		 */
+    		
+    		
             final NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-            .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
+            //.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
             .setSmallIcon(android.R.drawable.btn_star)
             .setContentTitle("Create Convert Media ltd.")
-            .setContentText(extras.getString("message") + " added successfully!");
+            .setContentText(extras.getString("update_message") + " added successfully!");
+            
             
             mBuilder.setContentIntent(contentIntent);
             mNotificationManager.notify(notification_id, mBuilder.build());
