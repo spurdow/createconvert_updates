@@ -1,5 +1,6 @@
 package com.createconvertupdates.media;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -190,7 +196,46 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.putExtra("activity_change", 0 );
 				startActivity(i);
-		break;
+			break;
+		case R.id.id_compose: 
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			ViewGroup view = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.new_message, null);
+			
+			Spinner select = (Spinner) view.findViewById(R.id.messaging_spinner);
+			EditText m_title = (EditText) view.findViewById(R.id.messaging_title);
+			EditText m_content = (EditText) view.findViewById(R.id.messaging_content);
+			
+			Button message = (Button) view.findViewById(R.id.m_btn_message);
+			Button cancel = (Button) view.findViewById(R.id.m_btn_cancel);
+			
+			builder.setView(view);
+			
+			final AlertDialog alert = builder.create();
+			
+			message.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					/**
+					 *  messaging action
+					 */
+				}
+				
+			});
+			
+			cancel.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					alert.dismiss();
+				}
+				
+			});
+			alert.show();
+			break;
+		
 		
 		}
 		

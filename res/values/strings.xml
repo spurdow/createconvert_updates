@@ -16,5 +16,6 @@
     <string name="string_cancel">Cancel</string>
     <string name="null_val"></string>
     <string name="string_confirm_password">Confirm Password</string>
+    <string name="string_message">Message</string>
 
 </resources>
