@@ -205,13 +205,14 @@ public class GcmIntentService extends IntentService {
     		LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
 			
     		Intent intent = new Intent(this , ProjectFragment.class);
-    		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+    		intent.putExtra("project_id", project_id);
+    		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_ONE_SHOT);
     		
     		/*
     		 *  get the project
     		 */
     		ProjectHelper projectHelper = new ProjectHelper(getApplicationContext());
-    		//Project getProject = projectHelper.get(pmd.)
+    		Project getProject = projectHelper.get(pmd.getProject_id());
     		projectHelper.close();
     		/*
     		 *  notification side
@@ -223,7 +224,7 @@ public class GcmIntentService extends IntentService {
             .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
             .setSmallIcon(android.R.drawable.btn_star)
             .setContentTitle("Create Convert Media ltd.")
-            .setContentText(extras.getString("update_message") + " added successfully!");
+            .setContentText(getProject.getName() + " updated!");
             
             
             mBuilder.setContentIntent(contentIntent);

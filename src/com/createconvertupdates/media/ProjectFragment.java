@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
 import com.createconvertupdates.dbentities.ProjectHelper;
@@ -66,7 +67,25 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		mBar = getSupportActionBar();
 		
 		mBar.setTitle(project.getName());
+		mBar.setHomeButtonEnabled(true);
+		
+		
 	}
+	
+	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+		case android.R.id.home: 
+				finish();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+
 
 	@Override
 	protected void onPause() {
