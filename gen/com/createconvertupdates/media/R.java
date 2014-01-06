@@ -1296,7 +1296,8 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int home_page_menu=0x7f0b0000;
-        public static final int splash_screen=0x7f0b0001;
+        public static final int project_fragment_menu=0x7f0b0001;
+        public static final int splash_screen=0x7f0b0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

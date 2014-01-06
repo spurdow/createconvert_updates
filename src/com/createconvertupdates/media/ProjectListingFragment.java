@@ -35,6 +35,7 @@ public class ProjectListingFragment extends SherlockFragment implements OnItemCl
 
 	private ListView listView;
 	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -127,7 +128,12 @@ public class ProjectListingFragment extends SherlockFragment implements OnItemCl
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 		// TODO Auto-generated method stub
-		long p_id  = adapter.getList().get(pos).getId();
+		Project p  = adapter.getList().get(pos);
+		p.setStatus(0);
+		long p_id  = p.getId();
+		ProjectHelper projectHelper = new ProjectHelper(this.getActivity());
+		projectHelper.update(p_id, p);
+		adapter.update(pos, p);
 		Intent i = new Intent(this.getActivity() , ProjectFragment.class);
 		i.putExtra("project_id", p_id);
 		startActivity(i);

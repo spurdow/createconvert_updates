@@ -126,7 +126,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 			values.put(FIELD_SLOGAN, p.getSlogan());
 			values.put(FIELD_STATUS, p.getStatus());
 			
-			affected_rows = db.update(DB_NAME, values, FIELD_ID + " = ?", new String[]{ String.valueOf(id)});
+			affected_rows = db.update(TABLE_NAME, values, FIELD_ID + " = ?", new String[]{ String.valueOf(id)});
 			
 
 		

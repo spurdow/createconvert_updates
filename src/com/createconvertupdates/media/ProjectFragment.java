@@ -68,6 +68,7 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		
 		mBar.setTitle(project.getName());
 		mBar.setHomeButtonEnabled(true);
+		mBar.setDisplayHomeAsUpEnabled(true);
 		
 		
 	}
