@@ -11,12 +11,6 @@ public interface IHelperActions<T> {
 	 */
 	public long add(T object);
 	
-	/**
-	 * get Object from the table
-	 * @param id
-	 * @return
-	 */
-	public T get(long id);
 	
 	/**
 	 * update object from the table
@@ -34,10 +28,6 @@ public interface IHelperActions<T> {
 	 * @return
 	 */
 	public T delete(long id , T object);
-	/**
-	 * get all objects from the table
-	 * @return
-	 */
-	public List<T> getAll();
+
 	
 }

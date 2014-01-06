@@ -62,16 +62,15 @@ public class ProjectMetaDataHelper implements IHelperActions<ProjectMetaData>{
 		return id;
 	}
 
-	@Override
-	public ProjectMetaData get(long id) {
+	public ProjectMetaData get(long id , long project_id) {
 		// TODO Auto-generated method stub
 		ProjectMetaData projectmetadata = new ProjectMetaData();
 		
 		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		
-		String selectQuery = "SELECT * FROM " +TABLE_NAME +" WHERE " + FIELD_ID + " = ?" ;
+		String selectQuery = "SELECT * FROM " +TABLE_NAME +" WHERE " + FIELD_ID + " = ? AND " + FIELD_PROJECT_ID +" = ?";
 		
-		Cursor c = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+		Cursor c = db.rawQuery(selectQuery, new String[]{String.valueOf(id) , String.valueOf(project_id)});
 		
 		if(c!=null && c.moveToFirst()){
 			projectmetadata.setId(c.getInt(c.getColumnIndex(FIELD_ID)));
@@ -116,15 +115,14 @@ public class ProjectMetaDataHelper implements IHelperActions<ProjectMetaData>{
 		return (affected_rows > 0)? object : null;
 	}
 
-	@Override
-	public List<ProjectMetaData> getAll() {
+	public List<ProjectMetaData> getAll(long project_id) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		List<ProjectMetaData> list = new ArrayList<ProjectMetaData>();
 		
-		String sql = "SELECT * FROM " + TABLE_NAME;
+		String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + FIELD_PROJECT_ID + " = ?";
 		
-		Cursor c = db.rawQuery(sql, null);
+		Cursor c = db.rawQuery(sql, new String[]{String.valueOf(project_id)});
 		
 		if(c.moveToFirst()){
 			do{

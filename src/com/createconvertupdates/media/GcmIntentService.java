@@ -193,6 +193,7 @@ public class GcmIntentService extends IntentService {
 			pmd.setStatus(Integer.parseInt(extras.getString("status")));
 			
 			long id = helper.add(pmd);
+			long project_id = pmd.getProject_id();
 			helper.close();
 			
 			/*
@@ -200,6 +201,7 @@ public class GcmIntentService extends IntentService {
     		 */
     		Intent i = new Intent("new_project_message");
     		i.putExtra("id", id);
+    		i.putExtra("project_id", project_id);
     		LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
 			
     		Intent intent = new Intent(this , ProjectFragment.class);
@@ -218,7 +220,7 @@ public class GcmIntentService extends IntentService {
     		
             final NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-            //.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
+            .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
             .setSmallIcon(android.R.drawable.btn_star)
             .setContentTitle("Create Convert Media ltd.")
             .setContentText(extras.getString("update_message") + " added successfully!");

@@ -41,19 +41,19 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		
 		
 		
-		long id = extras.getLong("project_id");
+		long p_id = extras.getLong("project_id");
 		
 		ProjectHelper pHelper = new ProjectHelper(this);
 		
 		
 		
-		Project project = pHelper.get(id);
+		Project project = pHelper.get(p_id);
 		
 		pHelper.close();
 		
 		ProjectMetaDataHelper pmdHelper = new ProjectMetaDataHelper(this);
 		
-		List<ProjectMetaData> pmdLists = pmdHelper.getAll();
+		List<ProjectMetaData> pmdLists = pmdHelper.getAll(p_id);
 
 		
 		ProjectMetaDataAdapter adapter= new ProjectMetaDataAdapter(this , pmdLists);
@@ -106,12 +106,13 @@ public class ProjectFragment extends SherlockFragmentActivity{
 			// TODO Auto-generated method stub
 			
 			final long id = intent.getLongExtra("id", -1);
+			final long project_id = intent.getLongExtra("project_id", -1);
 			/*
 			 *  if there is a record then update the adapter
 			 */
 			Log.d(TAG, id + " Updating... Projects Messages");
 			ProjectMetaDataHelper helper = new ProjectMetaDataHelper(context);
-			adapter.add(helper.get(id));
+			adapter.add(helper.get(id , project_id));
 			
 		}
 		

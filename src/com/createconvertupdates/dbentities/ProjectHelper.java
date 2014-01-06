@@ -84,7 +84,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 		
 	}
 
-	@Override
+
 	public Project get(long id) {
 		// TODO Auto-generated method stub
 		Project p = new Project();
@@ -134,7 +134,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 		return affected_rows > 0;
 	}
 
-	@Override
+
 	public List<Project> getAll() {
 		// TODO Auto-generated method stub
 		
