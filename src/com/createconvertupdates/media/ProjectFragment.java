@@ -9,19 +9,25 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
+import com.createconvertupdates.commons.BitmapDownloaderTask;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.entities.ProjectMetaData;
+import com.createconvertupdates.iface.IImageDownload;
 
-public class ProjectFragment extends SherlockFragmentActivity{
+public class ProjectFragment extends SherlockFragmentActivity implements IImageDownload{
 
 	
 	public static final String TAG = "ProjectFragment";
@@ -39,16 +45,29 @@ public class ProjectFragment extends SherlockFragmentActivity{
 		listView = (ListView) findViewById(R.id.id_listview);
 		
 		Bundle extras = getIntent().getExtras();
-		
-		
-		
+
 		long p_id = extras.getLong("project_id");
 		
 		ProjectHelper pHelper = new ProjectHelper(this);
 		
-		
-		
 		Project project = pHelper.get(p_id);
+		
+		/*
+		 *  add header
+		 */
+		ViewGroup header = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.project_header_layout, null);
+		
+		ImageView image = (ImageView) header.findViewById(R.id.project_header_image);
+		TextView slogan = (TextView) header.findViewById(R.id.project_header_slogan);
+		
+		slogan.setText(project.getSlogan());
+		
+		/**
+		 *  download the image
+		 */
+		download(project.getImagePath() , image);
+		
+		listView.addHeaderView(header);
 		
 		pHelper.close();
 		
@@ -135,6 +154,14 @@ public class ProjectFragment extends SherlockFragmentActivity{
 			adapter.add(helper.get(id , project_id));
 			
 		}
+		
+	}
+
+	@Override
+	public void download(String url, ImageView view) {
+		// TODO Auto-generated method stub
+		BitmapDownloaderTask task = new BitmapDownloaderTask(view);
+		task.execute(url);
 		
 	}
 	
