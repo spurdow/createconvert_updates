@@ -17,5 +17,7 @@
     <string name="null_val"></string>
     <string name="string_confirm_password">Confirm Password</string>
     <string name="string_message">Message</string>
+    <string name="string_title">Title</string>
+    <string name="string_content">Content</string>
 
 </resources>

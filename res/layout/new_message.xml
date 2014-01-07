@@ -27,7 +27,8 @@
         android:id="@+id/messaging_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:ems="10"
+        android:hint="@string/string_title" />
 
     <TextView
         android:id="@+id/err_message_title"
@@ -41,6 +42,7 @@
         android:layout_height="100dp"
         android:layout_weight="0.02"
         android:ems="10"
+        android:hint="@string/string_content"
         android:singleLine="false" >
 
         <requestFocus />
@@ -80,6 +82,11 @@
             android:background="@drawable/custom_btn_orange"
             android:text="@string/string_cancel" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
     </RelativeLayout>
 
 </LinearLayout>

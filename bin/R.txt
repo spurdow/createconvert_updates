@@ -552,6 +552,7 @@ int string null_val 0x7f090034
 int string str_uname 0x7f09002a
 int string string_cancel 0x7f090033
 int string string_confirm_password 0x7f090035
+int string string_content 0x7f090038
 int string string_email 0x7f090032
 int string string_fname 0x7f09002e
 int string string_lname 0x7f09002f
@@ -560,6 +561,7 @@ int string string_message 0x7f090036
 int string string_mname 0x7f090030
 int string string_password 0x7f09002b
 int string string_register 0x7f09002c
+int string string_title 0x7f090037
 int string string_username 0x7f090031
 int style ActionBar_Solid_Createconvert 0x7f0a0068
 int style ActionBar_Transparent_Createconvert 0x7f0a0069

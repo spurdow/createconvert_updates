@@ -1455,6 +1455,7 @@ containing a value of this type.
         public static final int str_uname=0x7f09002a;
         public static final int string_cancel=0x7f090033;
         public static final int string_confirm_password=0x7f090035;
+        public static final int string_content=0x7f090038;
         public static final int string_email=0x7f090032;
         public static final int string_fname=0x7f09002e;
         public static final int string_lname=0x7f09002f;
@@ -1463,6 +1464,7 @@ containing a value of this type.
         public static final int string_mname=0x7f090030;
         public static final int string_password=0x7f09002b;
         public static final int string_register=0x7f09002c;
+        public static final int string_title=0x7f090037;
         public static final int string_username=0x7f090031;
     }
     public static final class style {

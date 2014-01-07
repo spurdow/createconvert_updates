@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -59,18 +60,18 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 			holder.image.setVisibility(View.VISIBLE);
 			holder.name.setText(mprojects.getName());
 			holder.checkBox.setChecked(mprojects.isCheck());
-			
-			holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+			holder.checkBox.setOnClickListener(new OnClickListener(){
 
 				@Override
-				public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
 					Log.d(TAG, arg0.toString());
-					Log.v(TAG, "FROM " + mprojects.isCheck() + " TO " + arg1 );
-					mprojects.setCheck(arg1);
+					Log.v(TAG, "FROM " + mprojects.isCheck() + " TO " + !mprojects.isCheck() );
+					mprojects.setCheck(!mprojects.isCheck());
 					Log.d(TAG, "Project " + mprojects.getId());
 					saveSpinnerData(inflater.getContext() , mprojects);
 				}
+
 				
 			});
 			
