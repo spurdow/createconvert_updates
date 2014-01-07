@@ -52,36 +52,39 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 			holder.name.setText("Select atleast 1");
 			holder.checkBox.setVisibility(View.INVISIBLE);
 			holder.image.setVisibility(View.INVISIBLE);
-			return child;
+			holder.checkBox.setOnCheckedChangeListener(null);
+			
 		}else{
 			holder.checkBox.setVisibility(View.VISIBLE);
 			holder.image.setVisibility(View.VISIBLE);
+			holder.name.setText(mprojects.getName());
+			holder.checkBox.setChecked(mprojects.isCheck());
+			
+			holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+				@Override
+				public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+					// TODO Auto-generated method stub
+					Log.d(TAG, arg0.toString());
+					Log.v(TAG, "FROM " + mprojects.isCheck() + " TO " + arg1 );
+					mprojects.setCheck(arg1);
+					Log.d(TAG, "Project " + mprojects.getId());
+					saveSpinnerData(inflater.getContext() , mprojects);
+				}
+				
+			});
+			
+			/*
+			 *  download the weak reference bitmap image for imageview
+			 */
+			// remove this when online
+			String replace = mprojects.getImagePath().replace("http://localhost/", Utilities.HOST_NAME);
+			//
+			mprojects.setImagePath(replace);
+			download(mprojects.getImagePath() , holder.image);
 		}
 		
-		holder.name.setText(mprojects.getName());
-		holder.checkBox.setChecked(mprojects.isCheck());
-		
-		holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
-			@Override
-			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-				// TODO Auto-generated method stub
-				Log.v(TAG, "FROM " + mprojects.isCheck() + " TO " + arg1 );
-				mprojects.setCheck(arg1);
-				Log.d(TAG, "Project " + mprojects.getId());
-				saveSpinnerData(inflater.getContext() , mprojects);
-			}
-			
-		});
-		
-		/*
-		 *  download the weak reference bitmap image for imageview
-		 */
-		// remove this when online
-		String replace = mprojects.getImagePath().replace("http://localhost/", Utilities.HOST_NAME);
-		//
-		mprojects.setImagePath(replace);
-		download(mprojects.getImagePath() , holder.image);
 		
 		return child;
 	}

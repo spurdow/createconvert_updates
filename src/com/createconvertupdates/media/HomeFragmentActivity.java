@@ -223,7 +223,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 			 *  add spinner adapter and list
 			 */
 			ProjectHelper helper = new ProjectHelper(this);
-			List<MessageProject> m_project = getSpinnerData(this , helper.getListAsMessage());
+			final List<MessageProject> m_project = getSpinnerData(this , helper.getListAsMessage());
 			// add a dummy
 			m_project.add( 0 , new MessageProject());
 			
@@ -277,6 +277,8 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				}
 				
 			});
+			
+			
 			
 			Button message = (Button) view.findViewById(R.id.m_btn_message);
 			Button cancel = (Button) view.findViewById(R.id.m_btn_cancel);
