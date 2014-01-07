@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.createconvertupdates.entities.Customer;
+import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.iface.IHelperActions;
 
@@ -160,6 +161,17 @@ public class ProjectHelper implements IHelperActions<Project>{
 		c.close();
 		db.close();
 		return projects;
+	}
+	
+	public List<MessageProject> getListAsMessage(){
+		List<Project> projects = getAll();
+		List<MessageProject> mprojects = new ArrayList<MessageProject>();
+		for(Project project : projects){
+			MessageProject new_m_project = new MessageProject(project , false);
+			mprojects.add(0, new_m_project);
+		}
+		
+		return mprojects;
 	}
 
 	@Override

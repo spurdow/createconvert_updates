@@ -12,49 +12,45 @@
         android:scaleType="center"
         android:src="@drawable/ic_launcher" />
 
-    <RelativeLayout
+    <Spinner
+        android:id="@+id/messaging_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/err_message_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:text="@string/null_val" />
 
-        <Spinner
-            android:id="@+id/messaging_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
+    <EditText
+        android:id="@+id/messaging_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:ems="10" />
 
-        <EditText
-            android:id="@+id/messaging_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:ems="10" />
-    </RelativeLayout>
-
-    <RelativeLayout
+    <TextView
+        android:id="@+id/err_message_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:text="@string/null_val" />
 
-        <EditText
-            android:id="@+id/messaging_content"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:ems="10"
-            android:singleLine="false" >
+    <EditText
+        android:id="@+id/messaging_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.02"
+        android:ems="10"
+        android:singleLine="false" >
 
-            <requestFocus />
-        </EditText>
-    </RelativeLayout>
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/err_message_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/null_val" />
 
     <RelativeLayout
         android:layout_width="match_parent"

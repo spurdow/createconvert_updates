@@ -3,6 +3,7 @@ package com.createconvertupdates.adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.createconvertupdates.media.R;
 
 public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implements  IImageDownload {
 	
+	protected static final String TAG = "SpinnerAdapter";
 	private LayoutInflater inflater;
 	
 	public SpinnerAdapter(Context context, List<MessageProject> lists) {
@@ -45,6 +47,16 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 			holder = (ViewHolder) child.getTag();
 		}
 		
+		if(position == 0){
+			holder.name.setText("Select atleast 1");
+			holder.checkBox.setVisibility(View.INVISIBLE);
+			holder.image.setVisibility(View.INVISIBLE);
+			return child;
+		}else{
+			holder.checkBox.setVisibility(View.VISIBLE);
+			holder.image.setVisibility(View.VISIBLE);
+		}
+		
 		holder.name.setText(mprojects.getName());
 		holder.checkBox.setChecked(mprojects.isCheck());
 		
@@ -53,7 +65,9 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				// TODO Auto-generated method stub
+				Log.v(TAG, "FROM " + mprojects.isCheck() + " TO " + arg1 );
 				mprojects.setCheck(arg1);
+				
 			}
 			
 		});
@@ -63,7 +77,7 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 		 */
 		// remove this when online
 		String replace = mprojects.getImagePath().replace("http://localhost/", Utilities.HOST_NAME);
-		
+		//
 		mprojects.setImagePath(replace);
 		download(mprojects.getImagePath() , holder.image);
 		

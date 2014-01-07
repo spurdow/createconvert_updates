@@ -1,22 +1,29 @@
 package com.createconvertupdates.media;
 
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -24,8 +31,13 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.createconvertupdates.adapters.SpinnerAdapter;
 import com.createconvertupdates.adapters.ViewPagerAdapter;
+import com.createconvertupdates.commons.AfterTextChanged;
+import com.createconvertupdates.commons.Utilities;
+import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Customer;
+import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.tasks.GCMRegIDTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -36,6 +48,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 	protected static final String TAG = "HomeFragmentActivity";
 	private ActionBar mActionBar;
 	private ViewPager mViewPager;
+	private boolean error = false;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -58,7 +71,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 		/*
 		 * creating custom action bar layout
 		 */
-		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.action_bar_layout, null);
+		//afinal ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.action_bar_layout, null);
 		
 		/*
 		 *  get the sherlock action bar support
@@ -190,6 +203,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
+		
 		switch(item.getItemId()){
 		case R.id.id_logout: removeSavedCustomer(this);
 				Intent i = new Intent(this , SplashActivity.class);
@@ -198,12 +212,94 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				startActivity(i);
 			break;
 		case R.id.id_compose: 
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			ViewGroup view = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.new_message, null);
 			
 			Spinner select = (Spinner) view.findViewById(R.id.messaging_spinner);
-			EditText m_title = (EditText) view.findViewById(R.id.messaging_title);
-			EditText m_content = (EditText) view.findViewById(R.id.messaging_content);
+			
+			/**
+			 *  add spinner adapter and list
+			 */
+			ProjectHelper helper = new ProjectHelper(this);
+			List<MessageProject> m_project = helper.getListAsMessage();
+			// add a dummy
+			m_project.add( 0 , new MessageProject());
+			
+			final SpinnerAdapter adapter = new SpinnerAdapter(this , m_project);
+			
+			select.setAdapter(adapter);
+			
+			final EditText m_title = (EditText) view.findViewById(R.id.messaging_title);
+			final EditText m_content = (EditText) view.findViewById(R.id.messaging_content);
+			
+			final TextView err_spinner = (TextView) view.findViewById(R.id.err_message_spinner);
+			final TextView err_title = (TextView) view.findViewById(R.id.err_message_title);
+			final TextView err_content = (TextView) view.findViewById(R.id.err_message_content);
+			
+			err_spinner.setTextColor(Color.RED);
+			err_title.setTextColor(Color.RED);
+			err_content.setTextColor(Color.RED);
+			
+			
+			
+			m_title.addTextChangedListener(new AfterTextChanged(){
+
+				@Override
+				public void abstract_afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					if(!isValidString(s.toString())){
+						error = true;
+						err_title.setText("Title should not be empty");
+					}else{
+						error = false;
+						err_title.setText("");
+					}
+				}
+				
+			});
+			
+			m_content.addTextChangedListener(new AfterTextChanged(){
+
+				@Override
+				public void abstract_afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					if(!isValidString(s.toString())){
+						error = true;
+						err_content.setText("Content should not be empty");
+					}else{
+						error = false;
+						err_content.setText("");
+					}
+				}
+				
+			});
+			
+			if(isEmptyList(adapter.getList())){
+				error = true;
+				err_spinner.setText("Should select at least 1 project.");
+			}else{
+				error = false;
+				err_spinner.setText("");
+			}
+			
+			select.setOnItemClickListener(new OnItemClickListener(){
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					if(isEmptyList(adapter.getList())){
+						error = true;
+						err_spinner.setText("Should select at least 1 project.");
+					}else{
+						error = false;
+						err_spinner.setText("");
+					}
+					
+				}
+				
+			});
 			
 			Button message = (Button) view.findViewById(R.id.m_btn_message);
 			Button cancel = (Button) view.findViewById(R.id.m_btn_cancel);
@@ -243,7 +339,14 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 	}
 
 
-
+	private boolean isEmptyList(List<MessageProject> lists){
+		for(int i = 1 ; i < lists.size() ; i++){
+			if(lists.get(i).isCheck()){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	
 
