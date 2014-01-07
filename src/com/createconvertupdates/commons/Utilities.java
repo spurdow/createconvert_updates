@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +28,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.createconvertupdates.entities.Customer;
+import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.media.SplashActivity;
 
 public class Utilities {
@@ -103,6 +105,7 @@ public class Utilities {
 	public final static String TAG_REGISTER_RESULT = "register_result";
 	public final static String TAG_MESSAGE_RESULT = "message";
 	public final static String TAG_DATA_RESULT = "data";
+	private static final String TAG = "Utilities";
 	
 
 	
@@ -147,12 +150,43 @@ public class Utilities {
 	    return null;
 	}
 	/**
+	 *  get the spinner selected projects if there is
+	 */
+	public static List<MessageProject> getSpinnerData(Context context  , List<MessageProject> data){
+		SharedPreferences shared = getPreferences(context);
+		for(MessageProject mproject: data){
+			
+			Log.d(TAG, "PROEJCT " + mproject.getId() + " = " + shared.getBoolean("message_is_checked_" + mproject.getId(), false));
+			mproject.setCheck(shared.getBoolean("message_is_checked_" + mproject.getId(), false));
+			
+		}
+		
+		return data;
+		
+	}
+	/**
+	 *  save the spinner selected projects
+	 */
+	public static void saveSpinnerData(Context context, MessageProject data){
+		SharedPreferences shared = getPreferences(context);
+		SharedPreferences.Editor editor = shared.edit();
+		
+		if(shared.getLong("project_id_" + data.getId(), -1) != -1){
+			editor.putBoolean("message_is_checked_"+data.getId() ,data.isCheck() );
+		}else{
+			editor.putLong("project_id_" + data.getId(), data.getId());
+		}
+		editor.commit();
+	}
+	
+	/**
 	 *  get no. of notifications
 	 */
 	public static void removeNotificationCount(Context context , int notification_id , String notif_tags){
 		SharedPreferences shared = getPreferences(context);		
 		SharedPreferences.Editor editor = shared.edit();
 		editor.remove(notif_tags + "" + notification_id);
+		editor.commit();
 		
 	}
 	

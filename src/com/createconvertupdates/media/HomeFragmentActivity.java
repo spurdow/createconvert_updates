@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -222,7 +223,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 			 *  add spinner adapter and list
 			 */
 			ProjectHelper helper = new ProjectHelper(this);
-			List<MessageProject> m_project = helper.getListAsMessage();
+			List<MessageProject> m_project = getSpinnerData(this , helper.getListAsMessage());
 			// add a dummy
 			m_project.add( 0 , new MessageProject());
 			
@@ -255,6 +256,8 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 						error = false;
 						err_title.setText("");
 					}
+					
+					
 				}
 				
 			});
@@ -271,32 +274,6 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 						error = false;
 						err_content.setText("");
 					}
-				}
-				
-			});
-			
-			if(isEmptyList(adapter.getList())){
-				error = true;
-				err_spinner.setText("Should select at least 1 project.");
-			}else{
-				error = false;
-				err_spinner.setText("");
-			}
-			
-			select.setOnItemClickListener(new OnItemClickListener(){
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					// TODO Auto-generated method stub
-					if(isEmptyList(adapter.getList())){
-						error = true;
-						err_spinner.setText("Should select at least 1 project.");
-					}else{
-						error = false;
-						err_spinner.setText("");
-					}
-					
 				}
 				
 			});

@@ -18,6 +18,7 @@ import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.iface.IImageDownload;
 import com.createconvertupdates.media.R;
+import static com.createconvertupdates.commons.Utilities.*;
 
 public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implements  IImageDownload {
 	
@@ -67,7 +68,8 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 				// TODO Auto-generated method stub
 				Log.v(TAG, "FROM " + mprojects.isCheck() + " TO " + arg1 );
 				mprojects.setCheck(arg1);
-				
+				Log.d(TAG, "Project " + mprojects.getId());
+				saveSpinnerData(inflater.getContext() , mprojects);
 			}
 			
 		});
