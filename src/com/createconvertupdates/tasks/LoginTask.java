@@ -101,8 +101,7 @@ public class LoginTask extends AsyncTask<Void , Void , String>{
 			String tag_message = jsonObject.getString(TAG_MESSAGE_RESULT);
 			JSONArray jsonArray = jsonObject.getJSONArray(TAG_DATA_RESULT);
 			
-			//String register_result = jsonData.getString("result");
-			
+		
 			if(tag_result.trim().equals("error")){
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setIcon(android.R.drawable.ic_delete)
