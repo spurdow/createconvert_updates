@@ -3,9 +3,12 @@ package com.createconvertupdates.dbentities;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import static com.createconvertupdates.commons.Utilities.*;
 
 public class DBHelper extends SQLiteOpenHelper{
+
+	private final static String TAG = "DatabaseHelper";
 
 	public DBHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -17,6 +20,9 @@ public class DBHelper extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		db.execSQL(ProjectHelper.CREATE_TABLE);
 		db.execSQL(ProjectMetaDataHelper.CREATE_TABLE);
+		db.execSQL(ProjectMetaDataHelper.ADD_INDEX);
+		Log.d(TAG , "ADDING INDEX to PROEJCT META DATA" );
+		db.execSQL(MessageHelper.CREATE_TABLE);
 	}
 
 	@Override
@@ -25,6 +31,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		
 		db.execSQL(ProjectHelper.DROP_TABLE);
 		db.execSQL(ProjectMetaDataHelper.DROP_TABLE);
+		db.execSQL(MessageHelper.DROP_TABLE);
 		
 		onCreate(db);
 	}

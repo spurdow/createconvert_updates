@@ -61,25 +61,17 @@ public class ProjectHelper implements IHelperActions<Project>{
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
 		long id = -1;
-		
-			ContentValues values = new ContentValues();
+		ContentValues values = new ContentValues();
+		values.put(FIELD_NAME, p.getName() );
+		values.put(FIELD_IMAGE, p.getImagePath());
+		values.put(FIELD_SLOGAN, p.getSlogan());
+		values.put(FIELD_DATE, p.getDate());
+		values.put(FIELD_STATUS, p.getStatus());	
+		id = db.insert(TABLE_NAME, null, values);
 			
-			
-			
-			values.put(FIELD_NAME, p.getName() );
-			values.put(FIELD_IMAGE, p.getImagePath());
-			values.put(FIELD_SLOGAN, p.getSlogan());
-			values.put(FIELD_DATE, p.getDate());
-			values.put(FIELD_STATUS, p.getStatus());
-			
-			
-			id = db.insert(TABLE_NAME, null, values);
-			
-			if(id > 0){
-				Log.d(TAG, "added new project");
-			}
-			
-
+		if(id > 0){
+			Log.d(TAG, "added new project");
+		}
 		db.close();
 		return id ;
 		
@@ -112,25 +104,16 @@ public class ProjectHelper implements IHelperActions<Project>{
 	}
 
 	@Override
-	public boolean update(long id, Project object) {
+	public boolean update(long id, Project p) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
-		int affected_rows = 0;
-		
-			
-			ContentValues values = new ContentValues();
-			
-			Project p = (Project) object;
-			
-			values.put(FIELD_NAME , p.getName());
-			values.put(FIELD_IMAGE, p.getImagePath());
-			values.put(FIELD_SLOGAN, p.getSlogan());
-			values.put(FIELD_STATUS, p.getStatus());
-			
-			affected_rows = db.update(TABLE_NAME, values, FIELD_ID + " = ?", new String[]{ String.valueOf(id)});
-			
-
-		
+		int affected_rows = 0;			
+		ContentValues values = new ContentValues();	
+		values.put(FIELD_NAME , p.getName());
+		values.put(FIELD_IMAGE, p.getImagePath());
+		values.put(FIELD_SLOGAN, p.getSlogan());
+		values.put(FIELD_STATUS, p.getStatus());
+		affected_rows = db.update(TABLE_NAME, values, FIELD_ID + " = ?", new String[]{ String.valueOf(id)});
 		db.close();
 		return affected_rows > 0;
 	}
