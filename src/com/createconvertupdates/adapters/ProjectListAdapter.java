@@ -69,6 +69,7 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		// remove this when online
 		String replace = projects.get(position).getImagePath().replace("http://localhost/", Utilities.HOST_NAME);
 		
+		Log.d(TAG, "localhost has been replaced with " + replace);
 		projects.get(position).setImagePath(replace);
 		download(projects.get(position).getImagePath() , holder.image);
 		

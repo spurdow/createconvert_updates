@@ -42,13 +42,13 @@ public class Utilities {
 	/**
 	 *  Host name or the server base url
 	 */
-	public final static String HOST_NAME = "http://192.168.1.6/";
+	public final static String HOST_NAME = "http://192.168.1.5/";
 	/**
 	 *  sender id of the gcm 
 	 */
 	public final static String SENDER_ID = "601886556185";
 	/**
-	 *  user name and password for login task
+	 *  user name and password tags for login task
 	 */
 	public final static String TAG_USERNAME = "username";
 	public final static String TAG_PASSWORD = "password";
