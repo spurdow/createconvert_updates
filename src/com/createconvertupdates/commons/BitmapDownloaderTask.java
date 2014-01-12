@@ -6,10 +6,13 @@ import com.createconvertupdates.media.R;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 import static com.createconvertupdates.commons.Utilities.*;
 
 public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
+
+	private static final String TAG = "BitmapDownloaderTask";
 
 	private final int default_wh = 120;
 	
@@ -69,10 +72,12 @@ public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
         if (isCancelled()) {
             bitmap = null;
         }
+        
+        Log.d(TAG, "Width = " + w + " Height = " + h );
 
         if (imageRef != null) {
             
-            if (imageView != null && bitmap != null) {
+            if (imageView != null ) {
             	
                 imageView.setImageBitmap(Bitmap.createScaledBitmap(bitmap, w, h, false));
             }
