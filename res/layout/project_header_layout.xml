@@ -27,4 +27,13 @@
         android:singleLine="false"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/project_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/project_header_image"
+        android:layout_alignLeft="@+id/project_header_slogan"
+        android:text="@string/string_links"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

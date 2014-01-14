@@ -27,6 +27,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 	
 	public final static String FIELD_ID = "id";
 	private final static String FIELD_NAME = "name";
+	private final static String FIELD_WEBSITE = "website";
 	private final static String FIELD_IMAGE = "image";
 	private final static String FIELD_SLOGAN = "slogan";
 	private final static String FIELD_DATE = "date";
@@ -38,6 +39,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 			" ( " + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," + 
 			FIELD_NAME + " TEXT , " +
 			FIELD_IMAGE + " TEXT , " +
+			FIELD_WEBSITE + " TEXT , " +
 			FIELD_SLOGAN + " TEXT , " +
 			FIELD_DATE + "  TEXT," +
 			FIELD_STATUS + " INTEGER ) ";
@@ -63,6 +65,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 		long id = -1;
 		ContentValues values = new ContentValues();
 		values.put(FIELD_NAME, p.getName() );
+		values.put(FIELD_WEBSITE, p.getWebsite());
 		values.put(FIELD_IMAGE, p.getImagePath());
 		values.put(FIELD_SLOGAN, p.getSlogan());
 		values.put(FIELD_DATE, p.getDate());
@@ -91,6 +94,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 		
 		if(c != null && c.moveToFirst()){
 			p.setId(c.getInt(c.getColumnIndex(FIELD_ID)));
+			p.setWebsite(c.getString(c.getColumnIndex(FIELD_WEBSITE)));
 			p.setName(c.getString(c.getColumnIndex(FIELD_NAME)));
 			p.setImagePath(c.getString(c.getColumnIndex(FIELD_IMAGE)));
 			p.setDate(c.getString(c.getColumnIndex(FIELD_DATE)));
@@ -109,6 +113,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		int affected_rows = 0;			
 		ContentValues values = new ContentValues();	
+		values.put(FIELD_WEBSITE, p.getWebsite());
 		values.put(FIELD_NAME , p.getName());
 		values.put(FIELD_IMAGE, p.getImagePath());
 		values.put(FIELD_SLOGAN, p.getSlogan());
@@ -134,6 +139,7 @@ public class ProjectHelper implements IHelperActions<Project>{
 			do{
 				Project project = new Project();
 				project.setId(c.getInt(c.getColumnIndex(FIELD_ID)));
+				project.setWebsite(c.getString(c.getColumnIndex(FIELD_WEBSITE)));
 				project.setImagePath(c.getString(c.getColumnIndex(FIELD_IMAGE)));
 				project.setName(c.getString(c.getColumnIndex(FIELD_NAME)));
 				project.setSlogan(c.getString(c.getColumnIndex(FIELD_SLOGAN)));

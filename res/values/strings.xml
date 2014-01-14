@@ -19,5 +19,6 @@
     <string name="string_message">Message</string>
     <string name="string_title">Title</string>
     <string name="string_content">Content</string>
+    <string name="string_links"><a href="#" > View website </a></string>
 
 </resources>

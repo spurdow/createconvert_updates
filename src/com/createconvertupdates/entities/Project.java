@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 public class Project {
 	private long id;
 	private String name;
+	private String website;
 	private String imagePath;
 	private Bitmap image;
 	private String slogan;
@@ -16,17 +17,24 @@ public class Project {
 		
 	}
 	
-	public Project(long id, String name, String imagePath, Bitmap image, String slogan,
+	public Project(long id, String name,String website, String imagePath, Bitmap image, String slogan,
 			String date,
 			int status) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.website= website;
 		this.imagePath = imagePath;
 		this.image = image;
 		this.slogan = slogan;
 		this.status = status;
 	}
+	public Project(long id2, String name2, String imagePath2, Bitmap image2,
+			String slogan2, String date2, int status2) {
+		// TODO Auto-generated constructor stub
+		this(id2, name2, "", imagePath2, image2, slogan2, date2, status2);
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -39,6 +47,15 @@ public class Project {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
 	public String getImagePath() {
 		return imagePath;
 	}

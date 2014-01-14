@@ -68,17 +68,14 @@ public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
     		h = default_wh;
     	}
     	
-    	    	
         if (isCancelled()) {
             bitmap = null;
         }
-        
-        Log.d(TAG, "Width = " + w + " Height = " + h );
 
         if (imageRef != null) {
             
             if (imageView != null ) {
-            	
+
                 imageView.setImageBitmap(Bitmap.createScaledBitmap(bitmap, w, h, false));
             }
         }

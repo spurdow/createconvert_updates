@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -59,6 +60,11 @@ public class ProjectFragment extends SherlockFragmentActivity implements IImageD
 		
 		ImageView image = (ImageView) header.findViewById(R.id.project_header_image);
 		TextView slogan = (TextView) header.findViewById(R.id.project_header_slogan);
+		TextView website = (TextView) header.findViewById(R.id.project_link);
+		
+		Log.d(TAG, project.getWebsite());
+		
+		website.setText(Html.fromHtml("<a href=\'" + project.getWebsite() + "\' > View Website </a>"));
 		
 		slogan.setText(project.getSlogan());
 		
@@ -89,10 +95,7 @@ public class ProjectFragment extends SherlockFragmentActivity implements IImageD
 		mBar.setHomeButtonEnabled(true);
 		mBar.setDisplayHomeAsUpEnabled(true);
 		
-		
 	}
-	
-	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

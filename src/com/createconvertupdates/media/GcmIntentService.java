@@ -134,12 +134,14 @@ public class GcmIntentService extends IntentService {
     		Project project = new Project();
     		project.setId(Integer.parseInt(extras.getString("id")));
     		project.setName(extras.getString("name"));
+    		
+    		project.setWebsite(extras.getString("website"));
     		project.setImagePath(extras.getString("image"));
     		project.setSlogan(extras.getString("slogan"));
     		project.setDate(extras.getString("date_created"));
     		project.setStatus(Integer.parseInt(extras.getString("status")));
     		long id = helper.add(project);
-    		Log.d(TAG, helper.getAll().size() + "");
+    		Log.d(TAG, project.getWebsite() + " = WEBSITE ");
     		
     		/*
     		 *  send broadcast to project updates

@@ -21,7 +21,6 @@ public class DBHelper extends SQLiteOpenHelper{
 		db.execSQL(ProjectHelper.CREATE_TABLE);
 		db.execSQL(ProjectMetaDataHelper.CREATE_TABLE);
 		db.execSQL(ProjectMetaDataHelper.ADD_INDEX);
-		Log.d(TAG , "ADDING INDEX to PROEJCT META DATA" );
 		db.execSQL(MessageHelper.CREATE_TABLE);
 	}
 
