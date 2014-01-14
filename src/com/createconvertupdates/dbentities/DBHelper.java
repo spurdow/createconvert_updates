@@ -18,10 +18,29 @@ public class DBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
+		/**
+		 *  project_table
+		 */
 		db.execSQL(ProjectHelper.CREATE_TABLE);
+		/**
+		 *  project_metadata_table 
+		 *  with index to project_id
+		 */
 		db.execSQL(ProjectMetaDataHelper.CREATE_TABLE);
 		db.execSQL(ProjectMetaDataHelper.ADD_INDEX);
+		
+		
+		/**
+		 *  message_table
+		 */
 		db.execSQL(MessageHelper.CREATE_TABLE);
+		
+		/**
+		 *  message_metadata_table
+		 *  with index to message_id
+		 */
+		db.execSQL(MessageMetaDataHelper.CREATE_TABLE);
+		db.execSQL(MessageMetaDataHelper.ADD_INDEX);
 	}
 
 	@Override
@@ -31,6 +50,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		db.execSQL(ProjectHelper.DROP_TABLE);
 		db.execSQL(ProjectMetaDataHelper.DROP_TABLE);
 		db.execSQL(MessageHelper.DROP_TABLE);
+		db.execSQL(MessageMetaDataHelper.DROP_TABLE);
 		
 		onCreate(db);
 	}

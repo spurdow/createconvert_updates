@@ -35,7 +35,7 @@ public class ProjectMetaDataHelper implements IHelperActions<ProjectMetaData>{
 			FIELD_STATUS + " INTEGER , " +
 			"FOREIGN KEY  ( " + FIELD_PROJECT_ID + " ) REFERENCES " + ProjectHelper.TABLE_NAME + " ( " + ProjectHelper.FIELD_ID +" ));";
 	
-	public final static String ADD_INDEX = "CREATE INDEX " +  ProjectHelper.TABLE_NAME + "_"+ FIELD_PROJECT_ID + "_idx ON " + ProjectHelper.TABLE_NAME + " (" +ProjectHelper.FIELD_ID + ")" ;
+	public final static String ADD_INDEX = "CREATE INDEX " + TABLE_NAME + "_"+ FIELD_PROJECT_ID + "_idx ON " + TABLE_NAME + " (" + FIELD_PROJECT_ID + ")" ;
 	
 	
 	private DBHelper databaseHelper;

@@ -5,18 +5,18 @@ import java.util.List;
 
 public class Message {
 	private long id;
-	private long customer_id;
+	private String header;
 	private int status;
 	private List<MessageMetaData> lists;
 
-	public Message(long id , long customer_id , int status){
-		this(id , customer_id , status , new ArrayList<MessageMetaData>());
+	public Message(long id , String header , int status){
+		this(id ,header , status , new ArrayList<MessageMetaData>());
 	}
 	
-	public Message(long id, long customer_id, int status , List<MessageMetaData> lists) {
+	public Message(long id, String header, int status , List<MessageMetaData> lists) {
 		super();
 		this.id = id;
-		this.customer_id = customer_id;
+		this.setHeader(header);
 		this.status = status;
 		this.lists = lists;
 	}
@@ -30,12 +30,7 @@ public class Message {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getCustomer_id() {
-		return customer_id;
-	}
-	public void setCustomer_id(long customer_id) {
-		this.customer_id = customer_id;
-	}
+	
 	public int getStatus() {
 		return status;
 	}
@@ -47,6 +42,14 @@ public class Message {
 	}
 	public void setLists(List<MessageMetaData> lists) {
 		this.lists = lists;
+	}
+
+	public String getHeader() {
+		return header;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
 	}
 	
 }
