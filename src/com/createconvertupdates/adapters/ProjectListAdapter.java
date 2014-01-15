@@ -2,12 +2,12 @@ package com.createconvertupdates.adapters;
 
 import java.util.List;
 
-import com.createconvertupdates.commons.BitmapDownloaderTask;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.iface.IAdapterActions;
 import com.createconvertupdates.iface.IImageDownload;
 import com.createconvertupdates.media.R;
+import com.createconvertupdates.tasks.BitmapDownloaderTask;
 
 import android.content.Context;
 import android.graphics.Bitmap;

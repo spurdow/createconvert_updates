@@ -14,11 +14,12 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.createconvertupdates.commons.BitmapDownloaderTask;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.iface.IImageDownload;
 import com.createconvertupdates.media.R;
+import com.createconvertupdates.tasks.BitmapDownloaderTask;
+
 import static com.createconvertupdates.commons.Utilities.*;
 
 public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implements  IImageDownload {

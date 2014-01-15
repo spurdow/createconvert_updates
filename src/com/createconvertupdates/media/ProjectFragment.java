@@ -21,12 +21,12 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
-import com.createconvertupdates.commons.BitmapDownloaderTask;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.entities.ProjectMetaData;
 import com.createconvertupdates.iface.IImageDownload;
+import com.createconvertupdates.tasks.BitmapDownloaderTask;
 
 public class ProjectFragment extends SherlockFragmentActivity implements IImageDownload{
 
