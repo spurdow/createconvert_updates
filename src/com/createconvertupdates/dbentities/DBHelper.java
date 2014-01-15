@@ -9,10 +9,13 @@ import static com.createconvertupdates.commons.Utilities.*;
 public class DBHelper extends SQLiteOpenHelper{
 
 	private final static String TAG = "DatabaseHelper";
+	
+	private Context context;
 
 	public DBHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		// TODO Auto-generated constructor stub
+		this.context = context;
 	}
 
 	@Override
@@ -53,6 +56,10 @@ public class DBHelper extends SQLiteOpenHelper{
 		db.execSQL(MessageMetaDataHelper.DROP_TABLE);
 		
 		onCreate(db);
+	}
+	
+	public Context appContext(){
+		return context;
 	}
 
 }

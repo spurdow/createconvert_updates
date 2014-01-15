@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.createconvertupdates.entities.Message;
+import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.iface.IHelperActions;
 
 public class MessageHelper implements IHelperActions<Message> {
@@ -83,6 +84,10 @@ public class MessageHelper implements IHelperActions<Message> {
 		
 		SQLiteDatabase db = database.getReadableDatabase();
 		
+		MessageMetaDataHelper mm_dh = new MessageMetaDataHelper(database.appContext());
+		
+		
+		
 		Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
 		
 		if(c!= null && c.moveToFirst()){
@@ -90,7 +95,10 @@ public class MessageHelper implements IHelperActions<Message> {
 				long id = c.getLong(c.getColumnIndex(FIELD_ID));
 				String header = c.getString(c.getColumnIndex(FIELD_HEADER));
 				int status = c.getInt(c.getColumnIndex(FIELD_STATUS));
-				messages.add(new Message(id , header , status));
+				
+				List<MessageMetaData> list_mm = mm_dh.getAll( id );
+				
+				messages.add(new Message(id , header , status, list_mm ));
 				
 			}while(c.moveToNext());
 			

@@ -1,6 +1,6 @@
 package com.createconvertupdates.adapters;
 
-import com.createconvertupdates.media.MessageFragment;
+import com.createconvertupdates.media.MessageListingFragment;
 import com.createconvertupdates.media.ProjectListingFragment;
 import com.createconvertupdates.media.UpdateFragment;
 
@@ -24,7 +24,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 		switch(arg0){
 		case 0  : return new UpdateFragment();
 		case 1 	: return new ProjectListingFragment();
-		case 2 	: return new MessageFragment();
+		case 2 	: return new MessageListingFragment();
 			default: assert false;
 		};
 		
