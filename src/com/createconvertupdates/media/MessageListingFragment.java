@@ -2,6 +2,7 @@ package com.createconvertupdates.media;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +72,12 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
+		Message m = adapter.getList().get(arg2);
 		
+		Intent i = new Intent(this.getActivity() , MessageFragment.class);
+		i.putExtra("message_id", m.getId());
+		i.putExtra("message_title", m.getHeader());
+		startActivity(i);
 		
 	}
 	

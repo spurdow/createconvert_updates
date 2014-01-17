@@ -156,5 +156,9 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 		
 	}
 	
+	public void close(){
+		this.database.close();
+	}
+	
 
 }

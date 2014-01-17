@@ -1,6 +1,10 @@
 package com.createconvertupdates.entities;
 
 public class MessageMetaData {
+	
+	public final static int MINE = 0x0;
+	public final static int ADMIN = 0x01;
+	
 	private long id;
 	private long message_id;
 	private String title;
