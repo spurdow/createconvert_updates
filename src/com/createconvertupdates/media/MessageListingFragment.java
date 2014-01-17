@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -14,7 +16,7 @@ import com.createconvertupdates.dbentities.MessageHelper;
 import com.createconvertupdates.entities.Message;
 import com.createconvertupdates.entities.MessageMetaData;
 
-public class MessageListingFragment extends SherlockFragment {
+public class MessageListingFragment extends SherlockFragment implements OnItemClickListener {
 
 	
 	private ListView mListView;
@@ -54,11 +56,23 @@ public class MessageListingFragment extends SherlockFragment {
 		
 		mListView.setAdapter(adapter);
 		
+		mListView.setOnItemClickListener(this);
+		
 		messageHelper.close();
 		
 		
 		
 		super.onActivityCreated(savedInstanceState);
+	}
+
+
+
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+		
+		
 	}
 	
 	
