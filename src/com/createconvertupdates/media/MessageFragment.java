@@ -34,6 +34,8 @@ public class MessageFragment extends SherlockFragmentActivity {
 		
 		mContent = (EditText) findViewById(R.id.id_txt_message);
 		
+		mContent.set
+		
 		Bundle extras = getIntent().getExtras();
 		
 		message_id  = extras.getLong("message_id");
@@ -73,6 +75,7 @@ public class MessageFragment extends SherlockFragmentActivity {
 		if(Utilities.isValidString(content)){
 			mAdapter.add(new MessageMetaData(1, message_id, title  , content , "12-20-2014" , (Math.random() > 0.5f)? 0: 1 , 1 ) );
 			mListView.setSelection(mAdapter.getCount() - 1);
+			mContent.setText("");
 		}
 	}
 

@@ -74,7 +74,7 @@ public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
 
         if (imageRef != null) {
             
-            if (imageView != null ) {
+            if (imageView != null && bitmap != null) {
 
                 imageView.setImageBitmap(Bitmap.createScaledBitmap(bitmap, w, h, false));
             }
