@@ -3,13 +3,17 @@ package com.createconvertupdates.media;
 import java.util.List;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.createconvertupdates.adapters.MessageMetaDataAdapter;
+import com.createconvertupdates.commons.AfterTextChanged;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.MessageMetaDataHelper;
 import com.createconvertupdates.entities.MessageMetaData;
@@ -20,6 +24,7 @@ public class MessageFragment extends SherlockFragmentActivity {
 	private ListView mListView;
 	private ActionBar mBar;
 	private EditText mContent;
+	private Button mSend;
 	private MessageMetaDataAdapter mAdapter;
 	private long message_id;
 	private String title;
@@ -34,7 +39,22 @@ public class MessageFragment extends SherlockFragmentActivity {
 		
 		mContent = (EditText) findViewById(R.id.id_txt_message);
 		
-		mContent.set
+		mSend = (Button) findViewById(R.id.id_btn_send_message); 
+		mSend.setEnabled(false);
+		
+		mContent.addTextChangedListener(new AfterTextChanged(){
+
+			@Override
+			public void abstract_afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if(Utilities.isValidString(s.toString())){
+					mSend.setEnabled(true);
+				}else if(s.toString().trim().equals("")){
+					mSend.setEnabled(false);
+				}
+			}
+			
+		});
 		
 		Bundle extras = getIntent().getExtras();
 		
