@@ -12,6 +12,8 @@ import com.createconvertupdates.tasks.BitmapDownloaderTask;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuff.Mode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +52,10 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 			child.setTag(holder);
 		}else{
 			holder = (ViewHolder) child.getTag();
+		}
+		
+		if(projects.get(position).getStatus()==1){
+			child.getBackground().setColorFilter(Color.parseColor("gray"), PorterDuff.Mode.LIGHTEN);
 		}
 		
 		holder.name.setText(projects.get(position).getName());

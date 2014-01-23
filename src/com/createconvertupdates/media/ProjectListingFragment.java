@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -128,6 +129,7 @@ public class ProjectListingFragment extends SherlockFragment implements OnItemCl
 		// TODO Auto-generated method stub
 		Project p  = adapter.getList().get(pos);
 		p.setStatus(0);
+		arg1.setBackgroundColor(Color.WHITE);
 		long p_id  = p.getId();
 		ProjectHelper projectHelper = new ProjectHelper(this.getActivity());
 		projectHelper.update(p_id, p);
