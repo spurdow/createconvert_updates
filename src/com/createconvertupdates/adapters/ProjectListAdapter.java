@@ -62,7 +62,7 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		holder.slogan.setText(projects.get(position).getSlogan());
 		holder.date.setText(projects.get(position).getDate());
 		
-		Log.d(TAG, projects.get(position).getDate() + "s");
+		Log.d(TAG, projects.get(position).getDate() + "");
 		
 		if(projects.get(position).getStatus() == 1){
 			holder.status.setText("new");
