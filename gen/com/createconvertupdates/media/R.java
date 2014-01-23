@@ -1256,7 +1256,6 @@ containing a value of this type.
         public static final int mp_cbox=0x7f04004a;
         public static final int mp_image=0x7f040048;
         public static final int mp_project_name=0x7f040049;
-        public static final int myButton=0x7f040076;
         public static final int none=0x7f040010;
         public static final int normal=0x7f040001;
         public static final int pager=0x7f04003b;
@@ -1270,8 +1269,9 @@ containing a value of this type.
         public static final int showTitle=0x7f040007;
         public static final int splashscreen_child_layout=0x7f04003a;
         public static final int tabMode=0x7f040003;
+        public static final int tab_button=0x7f040076;
+        public static final int tab_text=0x7f040077;
         public static final int terrain=0x7f040012;
-        public static final int textOne=0x7f040077;
         public static final int txt_confirm_password_error=0x7f04006d;
         public static final int txt_cpassword=0x7f04006c;
         public static final int txt_email=0x7f04006e;
@@ -1338,7 +1338,7 @@ containing a value of this type.
         public static final int send_message_layout=0x7f030024;
         public static final int sherlock_spinner_dropdown_item=0x7f030025;
         public static final int sherlock_spinner_item=0x7f030026;
-        public static final int test_layout=0x7f030027;
+        public static final int tab_layout=0x7f030027;
         public static final int update_page=0x7f030028;
     }
     public static final class menu {

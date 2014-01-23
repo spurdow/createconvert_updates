@@ -50,6 +50,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 	private ActionBar mActionBar;
 	private ViewPager mViewPager;
 	private boolean error = false;
+	private LayoutInflater inflater;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -57,7 +58,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 		super.onCreate(arg0);
 		setContentView(R.layout.home_fragment_activity);
 		
-		
+		inflater = LayoutInflater.from(this);
 		
 		Customer customer = getSavedCustomer(HomeFragmentActivity.this);
 		Log.d(TAG, "Register ID = " + customer.getRegid());
@@ -171,8 +172,25 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				
 			}
 		};
+		/*
+		 *  create tab for updates
+		 */
+		Tab updates = mActionBar.newTab();
+		View v_updates = inflater.inflate(R.layout.tab_layout, null);
 		
-		mActionBar.addTab(mActionBar.newTab().setText(TAG_UPDATES).setTabListener(tabListener));
+		Button b_updates = (Button) v_updates.findViewById(R.id.tab_button);
+		TextView t_updates = (TextView) v_updates.findViewById(R.id.tab_text);
+		
+		t_updates.setVisibility(View.VISIBLE);
+		t_updates.setText("20");
+		
+		updates.setText(TAG_UPDATES);
+		updates.setTabListener(tabListener);
+		updates.setCustomView(v_updates);
+		
+		
+		mActionBar.addTab(updates);
+		
 		mActionBar.addTab(mActionBar.newTab().setText(TAG_PROJECTS).setTabListener(tabListener));
 		mActionBar.addTab(mActionBar.newTab().setText(TAG_MESSAGES).setTabListener(tabListener));
 	}

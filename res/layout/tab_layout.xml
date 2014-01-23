@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+  <Button
+    android:id="@+id/tab_button"
+    android:layout_width="65dip"
+    android:layout_height="65dip"/>
+
+  <TextView
+      android:id="@+id/tab_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignRight="@id/tab_button"
+      android:layout_alignTop="@id/tab_button"
+      android:background="@drawable/badge_circle"
+      android:text=""
+      android:textColor="#FFF"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      android:visibility="invisible" />
+
+</RelativeLayout>
