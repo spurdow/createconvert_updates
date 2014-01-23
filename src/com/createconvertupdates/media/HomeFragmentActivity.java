@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -41,6 +44,7 @@ import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.tasks.GCMRegIDTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 import static com.createconvertupdates.commons.Utilities.*;
 
@@ -172,24 +176,20 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				
 			}
 		};
-		/*
-		 *  create tab for updates
-		 */
-		Tab updates = mActionBar.newTab();
-		View v_updates = inflater.inflate(R.layout.tab_layout, null);
 		
-		Button b_updates = (Button) v_updates.findViewById(R.id.tab_button);
-		TextView t_updates = (TextView) v_updates.findViewById(R.id.tab_text);
+		LinearLayout mLayout = (LinearLayout) inflater.inflate(R.layout.tab_layout, null);
 		
-		t_updates.setVisibility(View.VISIBLE);
-		t_updates.setText("20");
+		TextView mtView = (TextView) mLayout.findViewById(R.id.txt_title);
+		mtView.setText("test");
+			
 		
-		updates.setText(TAG_UPDATES);
-		updates.setTabListener(tabListener);
-		updates.setCustomView(v_updates);
+		BadgeView mView = new BadgeView(this , mtView);
+		mView.setText("2");
+		mView.show();
 		
+		//Tab updates = mActionBar.newTab().setText(TAG_UPDATES);
 		
-		mActionBar.addTab(updates);
+		mActionBar.addTab(mActionBar.newTab().setText(TAG_UPDATES).setTabListener(tabListener));
 		
 		mActionBar.addTab(mActionBar.newTab().setText(TAG_PROJECTS).setTabListener(tabListener));
 		mActionBar.addTab(mActionBar.newTab().setText(TAG_MESSAGES).setTabListener(tabListener));

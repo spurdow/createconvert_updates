@@ -29,9 +29,9 @@ import com.createconvertupdates.entities.Project;
 public class ProjectListingFragment extends SherlockFragment implements OnItemClickListener {
 
 	private static final String TAG = "ProjectListingFragment";
-	
+
 	private ProjectListAdapter adapter;
-	
+
 	private UpdateReceiver mreceiver;
 
 	private ListView listView;

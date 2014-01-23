@@ -3,11 +3,13 @@ package com.createconvertupdates.adapters;
 import java.util.List;
 
 import com.createconvertupdates.commons.Utilities;
+import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.iface.IAdapterActions;
 import com.createconvertupdates.iface.IImageDownload;
 import com.createconvertupdates.media.R;
 import com.createconvertupdates.tasks.BitmapDownloaderTask;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -44,8 +46,13 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 			holder = new ViewHolder();
 			holder.name = (TextView) child.findViewById(R.id.h_name);
 			holder.slogan = (TextView) child.findViewById(R.id.h_slogan);
+			
 			holder.date = (TextView) child.findViewById(R.id.h_date);
-			holder.status = (TextView) child.findViewById(R.id.h_status);
+			/*holder.status = new BadgeView(getContext() , holder.date);
+			holder.status.setBadgeMargin(15, 10);
+			holder.status.setBadgeBackgroundColor(Color.parseColor("#A4C639"));
+			*/
+			holder.status_items = new BadgeView(getContext() , holder.date);	
 			holder.image = (ImageView) child.findViewById(R.id.h_imageView);
 
 			
@@ -55,19 +62,27 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		}
 		
 		if(projects.get(position).getStatus()==1){
-			child.getBackground().setColorFilter(Color.parseColor("gray"), PorterDuff.Mode.LIGHTEN);
+			child.setBackgroundResource(R.drawable.tab_unselected_focused_createconvert);
+			
 		}
+		
+		ProjectMetaDataHelper metaDataHelper = new ProjectMetaDataHelper(getContext());
+		int count = metaDataHelper.getAll(projects.get(position).getId()).size();
+		
 		
 		holder.name.setText(projects.get(position).getName());
 		holder.slogan.setText(projects.get(position).getSlogan());
 		holder.date.setText(projects.get(position).getDate());
 		
-		Log.d(TAG, projects.get(position).getDate() + "");
+		if(count == 0) count = 20;
 		
-		if(projects.get(position).getStatus() == 1){
-			holder.status.setText("new");
-			holder.status.setTextColor(Color.GREEN);
-		}
+		holder.status_items.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+		holder.status_items.setText(String.valueOf(count));
+		holder.status_items.show();
+		/*
+		holder.status.setBadgePosition(BadgeView.POSITION_BOTTOM_RIGHT);
+		holder.status.setText("new");
+		holder.status.show();
 		
 		/*
 		 *  download the weak reference bitmap image for imageview
@@ -88,7 +103,7 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		TextView name;
 		TextView slogan;
 		TextView date;
-		TextView status;
+		BadgeView status_items;
 		ImageView image;
 		
 	}

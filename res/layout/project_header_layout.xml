@@ -16,18 +16,6 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/project_header_slogan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="32dp"
-        android:layout_toRightOf="@+id/project_header_image"
-        android:maxLength="50"
-        android:singleLine="false"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/project_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,5 +23,17 @@
         android:layout_alignLeft="@+id/project_header_slogan"
         android:text="@string/string_links"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/project_header_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="21dp"
+        android:layout_toRightOf="@+id/project_header_image"
+        android:maxLength="50"
+        android:singleLine="false"
+        android:text="TextView" />
 
 </RelativeLayout>

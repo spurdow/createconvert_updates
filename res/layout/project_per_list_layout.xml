@@ -24,15 +24,6 @@
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/h_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/h_imageView"
-        android:layout_alignParentRight="true"
-        android:text="@string/null_val"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <ImageView
         android:id="@+id/h_imageView"
         android:layout_width="wrap_content"
