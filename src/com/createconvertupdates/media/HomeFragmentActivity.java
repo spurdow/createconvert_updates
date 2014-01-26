@@ -180,23 +180,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 			}
 		};
 		
-		LinearLayout mLinear = (LinearLayout) inflater.inflate(R.layout.tab_layout, null);
-		TextView mTextView = (TextView) mLinear.findViewById(R.id.txt_title);
-		
-		//mTextView.setLayoutParams(new LayoutParams(LayoutParams.))
-		
-		mTextView.setText("sadsa");
-		
-		BadgeView mBadgeView = new BadgeView(this , mTextView);
-		mBadgeView.setText("2");
-		mBadgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-		mBadgeView.show();
-		
-		Tab updates = mActionBar.newTab();
-		updates.setCustomView(null);
-		updates.setCustomView(mLinear);
-		updates.setTabListener(tabListener);
-		mActionBar.addTab(updates);
+
 		
 		mActionBar.addTab(mActionBar.newTab().setText(TAG_PROJECTS).setTabListener(tabListener));
 		mActionBar.addTab(mActionBar.newTab().setText(TAG_MESSAGES).setTabListener(tabListener));

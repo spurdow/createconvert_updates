@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 public class ConnectionDetector {
 
 	
-	public boolean isConnectedToInternet(Context context){
+	public static boolean isConnectedToInternet(Context context){
 	    boolean haveConnectedWifi = false;
 	    boolean haveConnectedMobile = false;
 

@@ -1,6 +1,7 @@
 package com.createconvertupdates.tasks;
 
 import com.createconvertupdates.adapters.MessageMetaDataAdapter;
+import com.createconvertupdates.commons.ConnectionDetector;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.Customer;
 
@@ -36,6 +37,16 @@ public class SendMessageTask extends AsyncTask<String , Void , String>{
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+	}
+
+	@Override
+	protected void onPreExecute() {
+		// TODO Auto-generated method stub
+		super.onPreExecute();
+		if(!ConnectionDetector.isConnectedToInternet(mContext)){
+			this.cancel(true);
+		}
+		
 	}
 
 	

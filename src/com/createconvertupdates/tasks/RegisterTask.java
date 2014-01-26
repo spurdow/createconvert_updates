@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.createconvertupdates.commons.ConnectionDetector;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.Customer;
 
@@ -137,6 +138,10 @@ public class RegisterTask extends AsyncTask<String , String, String> {
 		progress.setMessage("Please wait while we register you...");
 		progress.setIndeterminate(true);
 		progress.show();
+		if(!ConnectionDetector.isConnectedToInternet(context)){
+			progress.hide();
+			this.cancel(true);
+		}
 		super.onPreExecute();
 	}
 

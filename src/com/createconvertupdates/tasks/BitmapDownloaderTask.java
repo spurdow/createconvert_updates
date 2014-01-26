@@ -2,6 +2,7 @@ package com.createconvertupdates.tasks;
 
 import java.lang.ref.WeakReference;
 
+import com.createconvertupdates.commons.ConnectionDetector;
 import com.createconvertupdates.media.R;
 
 import android.graphics.Bitmap;
@@ -19,14 +20,14 @@ public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
 	private final WeakReference<ImageView> imageRef;
 	public BitmapDownloaderTask(ImageView view){
 		this.imageRef = new WeakReference<ImageView>(view);
-
-	}
-	
-	
+	}	
 	
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
+		
+		//if(ConnectionDetector.isConnectedToInternet(context))
+		
 		super.onPreExecute();
 		if(imageRef != null){
 			ImageView imageView = imageRef.get();

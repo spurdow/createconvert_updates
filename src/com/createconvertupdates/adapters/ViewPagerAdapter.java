@@ -2,7 +2,6 @@ package com.createconvertupdates.adapters;
 
 import com.createconvertupdates.media.MessageListingFragment;
 import com.createconvertupdates.media.ProjectListingFragment;
-import com.createconvertupdates.media.UpdateFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,9 +21,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int arg0) {
 		// TODO Auto-generated method stub
 		switch(arg0){
-		case 0  : return new UpdateFragment();
-		case 1 	: return new ProjectListingFragment();
-		case 2 	: return new MessageListingFragment();
+		case 0 	: return new ProjectListingFragment();
+		case 1 	: return new MessageListingFragment();
 			default: assert false;
 		};
 		

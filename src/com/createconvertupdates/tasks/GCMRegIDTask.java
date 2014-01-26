@@ -16,6 +16,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.createconvertupdates.commons.ConnectionDetector;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.media.HomeFragmentActivity;
@@ -132,6 +133,11 @@ public class GCMRegIDTask extends AsyncTask<Void , Void , String>{
 		dialog.setMessage("Please wait while we configure your device.");
 		dialog.setIndeterminate(true);
 		dialog.show();
+		
+		if(!ConnectionDetector.isConnectedToInternet(context)){
+			dialog.hide();
+			this.cancel(true);
+		}
 	}
 	
 	

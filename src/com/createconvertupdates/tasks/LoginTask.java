@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.createconvertupdates.commons.ConnectionDetector;
 import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.media.HomeFragmentActivity;
 
@@ -57,6 +58,11 @@ public class LoginTask extends AsyncTask<Void , Void , String>{
 		progress.setIndeterminate(true);
 		progress.setMessage("Please wait while we check your credentials");
 		progress.show();
+		if(!ConnectionDetector.isConnectedToInternet(context)){
+			dialog.hide();
+			this.cancel(true);
+		}
+		
 		super.onPreExecute();
 	}
 
