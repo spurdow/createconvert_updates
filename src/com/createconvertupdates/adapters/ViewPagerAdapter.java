@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
 	
-	public final static int PAGES = 3;
+	public final static int PAGES = 2;
 	
 	public ViewPagerAdapter(FragmentManager fm) {
 		super(fm);
