@@ -42,7 +42,7 @@ public class Utilities {
 	/**
 	 *  Host name or the server base url
 	 */
-	public final static String HOST_NAME = "http://192.168.1.14/";
+	public final static String HOST_NAME = "http://192.168.1.8/";
 	/**
 	 *  sender id of the gcm 
 	 */
