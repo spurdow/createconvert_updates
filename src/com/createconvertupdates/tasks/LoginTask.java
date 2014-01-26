@@ -61,6 +61,7 @@ public class LoginTask extends AsyncTask<Void , Void , String>{
 		if(!ConnectionDetector.isConnectedToInternet(context)){
 			dialog.hide();
 			this.cancel(true);
+			Log.d(TAG, "cancelled");
 		}
 		
 		super.onPreExecute();
@@ -100,6 +101,11 @@ public class LoginTask extends AsyncTask<Void , Void , String>{
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
 		progress.dismiss();
+		
+		if(isCancelled()){
+			return;
+		}
+		
 		try {
 			JSONObject jsonObject = new JSONObject(result);
 			

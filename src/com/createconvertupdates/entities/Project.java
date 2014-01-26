@@ -92,6 +92,9 @@ public class Project {
 		this.status = status;
 	}
 	
+	public String toString(){
+		return "date = "+ date;
+	}
 	
 
 }

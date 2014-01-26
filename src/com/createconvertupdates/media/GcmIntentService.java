@@ -97,7 +97,6 @@ public class GcmIntentService extends IntentService {
 		if(extras.getString("notify") == null) return;
 		
 		switch(notification_id){
-		case Utilities.CREATECONVERT_NOTIFICATION: break;
 		case Utilities.PROJECT_TABLE_NOTIFICATION: 
 				generateProjectTableNotification(extras , notification_id);
 			break;
