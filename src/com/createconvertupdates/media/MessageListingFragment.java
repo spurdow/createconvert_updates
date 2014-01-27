@@ -25,17 +25,12 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 	private MessageListAdapter adapter;
 	
 	
-	
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		return inflater.inflate(R.layout.list_layout , container, false);
 	}
-
-
-
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -45,14 +40,7 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 		MessageHelper messageHelper = new MessageHelper(getActivity());
 		
 		List<Message> messages = messageHelper.getAll();
-		
-		if(messages.size() < 1){
-			//MessageMetaData mmd = new MessageMetaData(1 , 1 , );
-			messages.add(new Message(1 , "test" , 1 ));
-			messages.add(new Message(2 , "test" , 1));
-			messages.add(new Message(3 , "test" , 1));
-		}
-		
+	
 		adapter = new MessageListAdapter(getActivity() , messages);
 		
 		mListView.setAdapter(adapter);
@@ -60,9 +48,7 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 		mListView.setOnItemClickListener(this);
 		
 		messageHelper.close();
-		
-		
-		
+				
 		super.onActivityCreated(savedInstanceState);
 	}
 

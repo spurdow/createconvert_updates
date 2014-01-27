@@ -1,11 +1,15 @@
 package com.createconvertupdates.media;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +18,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,6 +50,7 @@ import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.tasks.GCMRegIDTask;
+import com.createconvertupdates.tasks.SendMessageTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.readystatesoftware.viewbadger.BadgeView;
 
@@ -304,6 +310,40 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 					/**
 					 *  messaging action
 					 */
+					List<MessageProject> lists = adapter.getList();
+					List<Long> ids = new ArrayList<Long>();
+					for(MessageProject mProject : lists){
+						if(mProject.isCheck())
+							ids.add(mProject.getId());
+					}
+					
+					if(ids.size() <= 0){
+						AlertDialog.Builder builder = new AlertDialog.Builder(HomeFragmentActivity.this);
+						builder.setIcon(android.R.drawable.ic_delete)
+						.setTitle("Message Failed")
+						.setMessage("Please select one project");
+						AlertDialog dialog = builder.create();
+						
+						dialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new Dialog.OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface dialog1, int which) {
+								// TODO Auto-generated method stub
+								dialog1.dismiss();
+							}
+							
+						});
+						dialog.show();
+					}
+					
+					String ids_result = TextUtils.join(",",ids.toArray());
+					String message_title = m_title.getText().toString();
+					String message_content = m_content.getText().toString();
+					
+					SendMessageTask mMessageTask = new SendMessageTask(HomeFragmentActivity.this);
+					mMessageTask.execute(ids_result, message_title, message_content);
+					
+					
 				}
 				
 			});

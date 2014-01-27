@@ -54,6 +54,14 @@ public class Utilities {
 	public final static String TAG_PASSWORD = "password";
 	
 	
+	/**
+	 *  tag for messaging
+	 */
+	public final static String TAG_EMAIL = "email";
+	public final static String TAG_PROJECT_ID = "project_id";
+	public final static String TAG_MESSAGE_TITLE = "message_title";
+	public final static String TAG_MESSAGE_CONTENT = "message_content";
+
 	
 	/**
 	 *  php folder for the current site
@@ -72,6 +80,7 @@ public class Utilities {
 	public final static String REGISTER_URL = HOST_NAME + PHP_FOLDER + "register_customer";
 	public final static String LOGIN_URL = HOST_NAME + PHP_FOLDER + "login_customer";
 	public final static String REGISTER_REGID_URL = HOST_NAME + PHP_FOLDER + "register_regid";
+	public final static String SEND_MESSAGE_URL = HOST_NAME + PHP_FOLDER + "send_message";
 	
 	
 	/**
@@ -349,7 +358,16 @@ public class Utilities {
 		String result = "";
 		InputStream is = null;
 		final HttpEntity entity = response.getEntity();
+		
+		if(entity == null){
+			Log.w(TAG, "Failed to get entity");
+			return null;
+		}
+		
 		is = entity.getContent();
+		
+		
+		
 		try {
 			
 	            BufferedReader reader = new BufferedReader(new InputStreamReader(

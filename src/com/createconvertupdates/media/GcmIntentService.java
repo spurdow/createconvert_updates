@@ -3,6 +3,7 @@ package com.createconvertupdates.media;
 import java.util.List;
 
 import com.createconvertupdates.commons.Utilities;
+import com.createconvertupdates.dbentities.MessageHelper;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
@@ -100,11 +101,22 @@ public class GcmIntentService extends IntentService {
 		case Utilities.PROJECT_TABLE_NOTIFICATION: 
 				generateProjectTableNotification(extras , notification_id);
 			break;
-		case Utilities.MESSAGE_NOTIFICATION: break;
+		case Utilities.MESSAGE_NOTIFICATION: 
+				
+			break;
 		case Utilities.PROJECT_METADATA_NOTIFICATION: 
 				generateProjectUpdatesNotification(extras , notification_id);
 			break;
 		default: break;
+		}
+	}
+	
+	private void generateMessageNotification(Bundle extras , int notification_id){
+		if(Boolean.valueOf(extras.getString("notify"))){
+			MessageHelper mMessageHelper = new MessageHelper(this.getApplicationContext());
+			
+			
+			
 		}
 	}
 
