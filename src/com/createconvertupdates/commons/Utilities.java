@@ -42,7 +42,7 @@ public class Utilities {
 	/**
 	 *  Host name or the server base url
 	 */
-	public final static String HOST_NAME = "http://192.168.1.8/";
+	public final static String HOST_NAME = "http://192.168.1.21/";
 	/**
 	 *  sender id of the gcm 
 	 */
@@ -61,7 +61,12 @@ public class Utilities {
 	public final static String TAG_PROJECT_ID = "project_id";
 	public final static String TAG_MESSAGE_TITLE = "message_title";
 	public final static String TAG_MESSAGE_CONTENT = "message_content";
-
+	
+	/**
+	 * tag for message metadata
+	 */
+	public final static String TAG_MESSAGE_METADATA_ID = "metadata_message_id";
+	public final static String TAG_MESSAGE_METADATA_STATUS = "metadata_message_status";
 	
 	/**
 	 *  php folder for the current site
@@ -81,6 +86,7 @@ public class Utilities {
 	public final static String LOGIN_URL = HOST_NAME + PHP_FOLDER + "login_customer";
 	public final static String REGISTER_REGID_URL = HOST_NAME + PHP_FOLDER + "register_regid";
 	public final static String SEND_MESSAGE_URL = HOST_NAME + PHP_FOLDER + "send_message";
+	public final static String SEND_MESSAGE_METADATA_URL = HOST_NAME + PHP_FOLDER + "send_metadata";
 	
 	
 	/**
@@ -113,7 +119,11 @@ public class Utilities {
 	 */
 	public final static String TAG_REGISTER_RESULT = "register_result";
 	public final static String TAG_MESSAGE_RESULT = "message";
+	public final static String TAG_MESSAGE_METADATA_RESULT = "message_metadata_result";
 	public final static String TAG_DATA_RESULT = "data";
+	
+	
+	
 	private static final String TAG = "Utilities";
 	
 

@@ -35,6 +35,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		
 		/**
 		 *  message_table
+		 *  with index to project_id
 		 */
 		db.execSQL(MessageHelper.CREATE_TABLE);
 		

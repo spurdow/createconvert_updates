@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -101,5 +102,11 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 		ImageView image;
 		TextView name;
 		CheckBox checkBox;
+	}
+
+	@Override
+	public Filter getFilter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

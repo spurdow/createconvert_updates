@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,8 +45,8 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 		
 		
 		int count = 0;
-		if(lists.get(position).getLists() != null){
-			for(MessageMetaData mm : lists.get(position).getLists()){
+		if(lists.get(position).getList() != null){
+			for(MessageMetaData mm : lists.get(position).getList()){
 				if(mm.getStatus() == 1){
 					count++;
 				}
@@ -92,6 +93,12 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 	public List<Message> getAll() {
 		// TODO Auto-generated method stub
 		return getList();
+	}
+
+	@Override
+	public Filter getFilter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

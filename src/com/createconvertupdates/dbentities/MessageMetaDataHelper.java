@@ -30,7 +30,6 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 			" ( " + 
 			FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
 			FIELD_MESSAGE_ID + " INTEGER , " + 
-			FIELD_TITLE + " TEXT , " + 
 			FIELD_CONTENT +  " TEXT , " + 
 			FIELD_DATE + " TEXT , " + 
 			FIELD_TYPE + " INTEGER , " +

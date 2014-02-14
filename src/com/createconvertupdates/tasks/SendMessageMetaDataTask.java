@@ -1,64 +1,49 @@
 package com.createconvertupdates.tasks;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import com.createconvertupdates.adapters.MessageMetaDataAdapter;
 import com.createconvertupdates.commons.ConnectionDetector;
-import com.createconvertupdates.commons.Utilities;
+import com.createconvertupdates.dbentities.MessageHelper;
 import com.createconvertupdates.entities.Customer;
 
 import android.content.Context;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import static com.createconvertupdates.commons.Utilities.*;
 
-public class SendMessageTask extends AsyncTask<String , String , String>{
+public class SendMessageMetaDataTask extends AsyncTask<String , String , String>{
 
-	private static final String TAG = "SendMessageTask";
+	private static final String TAG = "SendMessageMetaData";
 	private Context mContext;
-
-	private String email;
-
 	
-	public SendMessageTask(Context context){
+	private String mContent ; 
+	private long mMetadata_id;
+	private int mStatus;
+	
+	public SendMessageMetaDataTask(Context context){
 		this.mContext = context;
-
 	}
 	
 	@Override
 	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
-		Customer customer = Utilities.getSavedCustomer(mContext);
 		String result = "";
 		
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		
-		Log.d(TAG, params[0]);
-		list.add(new BasicNameValuePair(TAG_EMAIL , customer.getEmail()));
-		list.add(new BasicNameValuePair(TAG_PROJECT_ID , params[0]) );
-		list.add(new BasicNameValuePair(TAG_MESSAGE_TITLE  ,  params[1]));
-		list.add(new BasicNameValuePair(TAG_MESSAGE_CONTENT , params[2]));
-		
-		
+		list.add(new BasicNameValuePair(TAG_MESSAGE_CONTENT ,params[0] ));
+		list.add(new BasicNameValuePair(TAG_MESSAGE_METADATA_ID , params[1]));
+		list.add(new BasicNameValuePair(TAG_MESSAGE_METADATA_STATUS , params[2]));
+
 		
 		AndroidHttpClient http = AndroidHttpClient.newInstance("Android");
 		HttpPost post = new HttpPost(SEND_MESSAGE_URL);
@@ -85,10 +70,13 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 			}
 		}
 		
+		if(isCancelled()){
+			result = null;
+		}
 		
 		return result;
 	}
-
+	
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
@@ -97,22 +85,9 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 		if(result != null){
 			Log.d(TAG, result);
 			this.publishProgress("Message Sending Success...");
-			try {
-				JSONObject jsonObject = new JSONObject(result);
-				
-				String tag_result = jsonObject.getString(TAG_MESSAGE_METADATA_RESULT);
-				String tag_message = jsonObject.getString(TAG_MESSAGE_RESULT);
-				JSONArray jsonArray = jsonObject.getJSONArray(TAG_DATA_RESULT);
-				
-				
-				
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			//MessageHelper helper = new MessageHelper(mContext);
 			
-			
+			//helper.add(object)
 		}
 	}
 
@@ -126,6 +101,4 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 		
 	}
 
-	
-	
 }

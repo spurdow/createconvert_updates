@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +23,16 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
+import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Project;
 
-public class ProjectListingFragment extends SherlockFragment implements OnItemClickListener {
+public class ProjectListingFragment extends SherlockFragment implements OnItemClickListener, OnQueryTextListener {
 
 	private static final String TAG = "ProjectListingFragment";
 
@@ -42,7 +48,7 @@ public class ProjectListingFragment extends SherlockFragment implements OnItemCl
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 
-		
+		this.setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.list_layout, container, false);
 	}
 
@@ -59,11 +65,15 @@ public class ProjectListingFragment extends SherlockFragment implements OnItemCl
 		
 		listView.setAdapter(adapter);
 		
+		listView.setTextFilterEnabled(true);
+		
 		mreceiver = new UpdateReceiver(adapter);
 		
 		projectHelper.close();
 		
 		listView.setOnItemClickListener(this);
+		
+		
 				
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -140,8 +150,43 @@ public class ProjectListingFragment extends SherlockFragment implements OnItemCl
 		
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		//MenuInflater inflater = this.getSupportMenuInflater();
+		
+		inflater.inflate(R.menu.home_page_menu, menu);
+		
+		MenuItem searchItem = menu.findItem(R.id.id_search);
+		SearchView searchView = (SearchView) searchItem.getActionView();
+		
+		searchView.setOnQueryTextListener(this);
+		
+
+		
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// TODO Auto-generated method stub
+
+	    adapter.getFilter().filter(query);
+	    
+	    return true;
+	        
+	        
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		// TODO Auto-generated method stub
+		adapter.getFilter().filter(newText);
+		return true;
+	}
+
+
 
 	
-
 	
 }

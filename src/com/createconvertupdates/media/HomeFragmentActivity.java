@@ -205,15 +205,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 	}
 
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		MenuInflater inflater = this.getSupportMenuInflater();
-		
-		inflater.inflate(R.menu.home_page_menu, menu);
-		
-		return super.onCreateOptionsMenu(menu);
-	}
+
 
 
 	@Override

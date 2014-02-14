@@ -1,8 +1,10 @@
 package com.createconvertupdates.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.createconvertupdates.commons.Utilities;
+import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.iface.IAdapterActions;
@@ -20,10 +22,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ProjectListAdapter extends AbstractListAdapter<Project> implements IAdapterActions<Project> , IImageDownload{
+
+public class ProjectListAdapter extends AbstractListAdapter<Project> implements IAdapterActions<Project> , IImageDownload {
 
 	private static final String TAG = "ProjectListAdapter";
 	private LayoutInflater inflater;
@@ -145,6 +150,71 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		downloadImage.execute(url);
 		
 	}
+
+	@Override
+	public Filter getFilter() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Filter filter = new Filter(){
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				// TODO Auto-generated method stub
+				Log.d("FILTERER", "Filtering Results " + constraint);
+				FilterResults filterResults = new FilterResults();
+				List<Project> filteredList = new ArrayList<Project>();
+				
+				
+				
+				if(getList() == null ){
+					ProjectHelper helper = new ProjectHelper(getContext());
+					setList( helper.getAll() );
+				}
+				
+				
+				
+				if(constraint == null || constraint.length() == 0){
+					ProjectHelper helper = new ProjectHelper(getContext());
+					setBackupList(helper.getAll());
+					filterResults.count = getBackupList().size();
+					filterResults.values = getBackupList();
+				}else{
+					constraint = constraint.toString().toLowerCase();
+					List<Project> l = getList();
+					for(int i =0 ; i < l.size() ; i++){
+						Project p = l.get(i);
+						if(p.getName().toString().toLowerCase().startsWith(constraint.toString()) ||
+						   p.getSlogan().toString().toLowerCase().startsWith(constraint.toString()) ||
+						   p.getWebsite().toString().toLowerCase().startsWith(constraint.toString())){
+							filteredList.add(p);
+						}
+						filterResults.count = filteredList.size();
+						filterResults.values  = filteredList;
+					}
+				}
+				return filterResults;
+				
+				
+
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			protected void publishResults(CharSequence constraint,
+					FilterResults results) {
+				// TODO Auto-generated method stub
+				setList((List<Project>) results.values);
+				notifyDataSetChanged();
+				
+			}
+			
+		};
+		
+		return filter;
+
+	}
+
+	
 
 
 

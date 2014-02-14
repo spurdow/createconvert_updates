@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -83,6 +84,12 @@ public class MessageMetaDataAdapter extends AbstractListAdapter<MessageMetaData>
 	private class ViewHolder{
 		TextView content;
 		TextView date;
+	}
+
+	@Override
+	public Filter getFilter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
