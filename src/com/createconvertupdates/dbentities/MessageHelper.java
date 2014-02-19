@@ -18,7 +18,6 @@ public class MessageHelper implements IHelperActions<Message> {
 	
 	public final static String FIELD_ID = "id";
 	public final static String FIELD_HEADER = "header";
-	public final static String FIELD_PROJECT_ID = "project_id";
 	public final static String FIELD_STATUS = "status";
 	
 	public final static String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -26,10 +25,7 @@ public class MessageHelper implements IHelperActions<Message> {
 	public final static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ( " +
 			 FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
 			 FIELD_HEADER + " TEXT ," +
-			 FIELD_PROJECT_ID + " INTEGER ," +
-			 FIELD_STATUS + " INTEGER , " +
-			 "FOREIGN KEY ( " + FIELD_PROJECT_ID + " ) REFERENCES " + ProjectHelper.TABLE_NAME + " ( " + ProjectHelper.FIELD_ID + "  )); "  ;
-	
+			 FIELD_STATUS + " INTEGER); ";
 
 	private DBHelper database;
 	
@@ -47,7 +43,6 @@ public class MessageHelper implements IHelperActions<Message> {
 		long id = -1;
 		ContentValues values = new ContentValues();
 		values.put(FIELD_HEADER, object.getHeader());
-		values.put(FIELD_PROJECT_ID, object.getProject_id());
 		values.put(FIELD_STATUS, object.getStatus());
 		
 		id = db.insert(TABLE_NAME, null, values);
@@ -65,7 +60,6 @@ public class MessageHelper implements IHelperActions<Message> {
 		ContentValues values = new ContentValues();	
 		
 		values.put(FIELD_HEADER, object.getHeader());
-		values.put(FIELD_PROJECT_ID, object.getProject_id());
 		values.put(FIELD_STATUS, object.getStatus());;
 		affected_rows = db.update(TABLE_NAME, values, FIELD_ID + " = ?", new String[]{String.valueOf(id)});
 		
@@ -100,12 +94,11 @@ public class MessageHelper implements IHelperActions<Message> {
 			do{
 				long id = c.getLong(c.getColumnIndex(FIELD_ID));
 				String header = c.getString(c.getColumnIndex(FIELD_HEADER));
-				long project_id = c.getLong(c.getColumnIndex(FIELD_PROJECT_ID));
 				int status = c.getInt(c.getColumnIndex(FIELD_STATUS));
 				
 				List<MessageMetaData> list = mmHelper.getAll(id);
 				
-				messages.add(new Message(id , header ,project_id ,  status , list));
+				messages.add(new Message(id , header ,  status , list));
 				
 			}while(c.moveToNext());
 			
@@ -120,7 +113,6 @@ public class MessageHelper implements IHelperActions<Message> {
 		if(c!=null && c.moveToFirst()){
 			message.setId(c.getLong(c.getColumnIndex(FIELD_ID)));
 			message.setHeader(c.getString(c.getColumnIndex(FIELD_HEADER)));
-			message.setProject_id(c.getLong(c.getColumnIndex(FIELD_PROJECT_ID)));
 			message.setStatus(c.getInt(c.getColumnIndex(FIELD_STATUS)));
 		}
 		return message;

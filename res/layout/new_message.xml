@@ -12,11 +12,6 @@
         android:scaleType="center"
         android:src="@drawable/ic_launcher" />
 
-    <Spinner
-        android:id="@+id/messaging_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <TextView
         android:id="@+id/err_message_spinner"
         android:layout_width="match_parent"

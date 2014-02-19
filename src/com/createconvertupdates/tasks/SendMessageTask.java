@@ -54,7 +54,6 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 		
 		Log.d(TAG, params[0]);
 		list.add(new BasicNameValuePair(TAG_EMAIL , customer.getEmail()));
-		list.add(new BasicNameValuePair(TAG_PROJECT_ID , params[0]) );
 		list.add(new BasicNameValuePair(TAG_MESSAGE_TITLE  ,  params[1]));
 		list.add(new BasicNameValuePair(TAG_MESSAGE_CONTENT , params[2]));
 		

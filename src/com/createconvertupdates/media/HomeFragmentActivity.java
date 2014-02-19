@@ -224,28 +224,28 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			ViewGroup view = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.new_message, null);
 			
-			Spinner select = (Spinner) view.findViewById(R.id.messaging_spinner);
+			/*Spinner select = (Spinner) view.findViewById(R.id.messaging_spinner);*/
 			
-			/**
+/*			*//**
 			 *  add spinner adapter and list
-			 */
+			 *//*
 			ProjectHelper helper = new ProjectHelper(this);
 			final List<MessageProject> m_project = getSpinnerData(this , helper.getListAsMessage());
 			// add a dummy
-			m_project.add( 0 , new MessageProject());
+			m_project.add( 0 , new MessageProject());*/
 			
-			final SpinnerAdapter adapter = new SpinnerAdapter(this , m_project);
+			/*final SpinnerAdapter adapter = new SpinnerAdapter(this , m_project);
 			
-			select.setAdapter(adapter);
+			select.setAdapter(adapter);*/
 			
 			final EditText m_title = (EditText) view.findViewById(R.id.messaging_title);
 			final EditText m_content = (EditText) view.findViewById(R.id.messaging_content);
 			
-			final TextView err_spinner = (TextView) view.findViewById(R.id.err_message_spinner);
+			/*final TextView err_spinner = (TextView) view.findViewById(R.id.err_message_spinner);*/
 			final TextView err_title = (TextView) view.findViewById(R.id.err_message_title);
 			final TextView err_content = (TextView) view.findViewById(R.id.err_message_content);
 			
-			err_spinner.setTextColor(Color.RED);
+			/*err_spinner.setTextColor(Color.RED);*/
 			err_title.setTextColor(Color.RED);
 			err_content.setTextColor(Color.RED);
 			
@@ -302,14 +302,14 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 					/**
 					 *  messaging action
 					 */
-					List<MessageProject> lists = adapter.getList();
+/*					List<MessageProject> lists = adapter.getList();
 					List<Long> ids = new ArrayList<Long>();
 					for(MessageProject mProject : lists){
 						if(mProject.isCheck())
 							ids.add(mProject.getId());
 					}
-					
-					if(ids.size() <= 0){
+					*/
+/*					if(ids.size() <= 0){
 						AlertDialog.Builder builder = new AlertDialog.Builder(HomeFragmentActivity.this);
 						builder.setIcon(android.R.drawable.ic_delete)
 						.setTitle("Message Failed")
@@ -327,13 +327,13 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 						});
 						dialog.show();
 					}
-					
-					String ids_result = TextUtils.join(",",ids.toArray());
+					*/
+					/*String ids_result = TextUtils.join(",",ids.toArray());*/
 					String message_title = m_title.getText().toString();
 					String message_content = m_content.getText().toString();
 					
 					SendMessageTask mMessageTask = new SendMessageTask(HomeFragmentActivity.this);
-					mMessageTask.execute(ids_result, message_title, message_content);
+					mMessageTask.execute(message_title, message_content);
 					
 					
 				}
