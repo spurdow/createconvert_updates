@@ -36,7 +36,7 @@ public class Utilities {
 	/**
 	 *  SQLite DB name
 	 */
-	public final static String DB_NAME = "createconvert_updates";
+	public final static String DB_NAME = "ccupdates";
 	public final static int DB_VERSION = 1;
 	
 	/**
