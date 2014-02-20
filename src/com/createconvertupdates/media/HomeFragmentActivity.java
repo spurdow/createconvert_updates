@@ -48,6 +48,7 @@ import com.createconvertupdates.commons.AfterTextChanged;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Customer;
+import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.tasks.GCMRegIDTask;
 import com.createconvertupdates.tasks.SendMessageTask;
@@ -331,9 +332,10 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 					/*String ids_result = TextUtils.join(",",ids.toArray());*/
 					String message_title = m_title.getText().toString();
 					String message_content = m_content.getText().toString();
+					String message_type = MessageMetaData.MINE + "";
 					
-					SendMessageTask mMessageTask = new SendMessageTask(HomeFragmentActivity.this);
-					mMessageTask.execute(message_title, message_content);
+					SendMessageTask mMessageTask = new SendMessageTask(HomeFragmentActivity.this , alert);
+					mMessageTask.execute(message_title, message_content , message_type);
 					
 					
 				}

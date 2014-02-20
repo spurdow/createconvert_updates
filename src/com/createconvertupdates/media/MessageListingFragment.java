@@ -60,9 +60,11 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 		// TODO Auto-generated method stub
 		Message m = adapter.getList().get(arg2);
 		
+		
 		Intent i = new Intent(this.getActivity() , MessageFragment.class);
 		i.putExtra("message_id", m.getId());
 		i.putExtra("message_title", m.getHeader());
+		
 		startActivity(i);
 		
 	}

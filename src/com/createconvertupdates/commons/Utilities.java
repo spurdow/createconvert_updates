@@ -119,7 +119,7 @@ public class Utilities {
 	 */
 	public final static String TAG_REGISTER_RESULT = "register_result";
 	public final static String TAG_MESSAGE_RESULT = "message";
-	public final static String TAG_MESSAGE_METADATA_RESULT = "message_metadata_result";
+	public final static String TAG_MESSAGE_METADATA_RESULT = "message_result";
 	public final static String TAG_DATA_RESULT = "data";
 	
 	

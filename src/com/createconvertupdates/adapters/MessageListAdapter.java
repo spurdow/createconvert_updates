@@ -15,6 +15,7 @@ import com.createconvertupdates.entities.Message;
 import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.iface.IAdapterActions;
 import com.createconvertupdates.media.R;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 public class MessageListAdapter extends AbstractListAdapter<Message> implements IAdapterActions<Message>{
 
@@ -37,6 +38,7 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 			holder.image  = (ImageView) child.findViewById(R.id.mal_image);
 			holder.title = (TextView) child.findViewById(R.id.mal_title);
 			holder.count = (TextView) child.findViewById(R.id.mal_count);
+			holder.bCount = new BadgeView(getContext()  , holder.count);
 			child.setTag(holder);
 		}else{
 			holder = (ViewHolder) child.getTag();
@@ -57,7 +59,10 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 		holder.title.setText(lists.get(position).getHeader());
 		
 		if(count > 0){
-			holder.count.setText(String.valueOf(count));
+			holder.bCount.setBadgePosition(BadgeView.POSITION_BOTTOM_RIGHT);
+			holder.bCount.setText(String.valueOf(count));
+			holder.bCount.show();
+			holder.count.setVisibility(View.INVISIBLE);
 		}
 		return child;
 	}
@@ -66,6 +71,7 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 		ImageView image;
 		TextView title;
 		TextView count;
+		BadgeView bCount;
 	}
 
 	@Override

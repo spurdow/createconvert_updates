@@ -20,7 +20,7 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 	
 	public final static String FIELD_ID = "id";
 	public final static String FIELD_MESSAGE_ID = "message_id";
-	public final static String FIELD_TITLE = "title";
+	public final static String FIELD_SERVER_MESSAGE_ID = "server_message_id";
 	public final static String FIELD_CONTENT = "content";
 	public final static String FIELD_DATE = "date";
 	public final static String FIELD_TYPE = "type";
@@ -30,6 +30,7 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 			" ( " + 
 			FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
 			FIELD_MESSAGE_ID + " INTEGER , " + 
+			FIELD_SERVER_MESSAGE_ID + " INTEGER , " +
 			FIELD_CONTENT +  " TEXT , " + 
 			FIELD_DATE + " TEXT , " + 
 			FIELD_TYPE + " INTEGER , " +
@@ -54,7 +55,7 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 		
 		ContentValues values = new ContentValues();
 		values.put(FIELD_MESSAGE_ID, object.getMessage_id());
-		values.put(FIELD_TITLE, object.getTitle());
+		values.put(FIELD_SERVER_MESSAGE_ID, object.getServer_message_id());
 		values.put(FIELD_CONTENT, object.getContent());
 		values.put(FIELD_DATE, object.getDate());
 		values.put(FIELD_TYPE, object.getType());
@@ -72,7 +73,6 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 		SQLiteDatabase db = database.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
-		values.put(FIELD_TITLE, object.getTitle());
 		values.put(FIELD_CONTENT, object.getContent());
 		values.put(FIELD_DATE, object.getDate());
 		values.put(FIELD_TYPE, object.getType());
@@ -109,7 +109,7 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 		if(cursor != null && cursor.moveToFirst()){
 			long mid = cursor.getLong(cursor.getColumnIndex(FIELD_ID));
 			long mmid = cursor.getLong(cursor.getColumnIndex(FIELD_MESSAGE_ID));
-			String title = cursor.getString(cursor.getColumnIndex(FIELD_TITLE));
+			long smid = cursor.getLong(cursor.getColumnIndex(FIELD_SERVER_MESSAGE_ID));
 			String content = cursor.getString(cursor.getColumnIndex(FIELD_CONTENT));
 			String date = cursor.getString(cursor.getColumnIndex(FIELD_DATE));
 			int type = cursor.getInt(cursor.getColumnIndex(FIELD_TYPE));
@@ -117,7 +117,7 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 			
 			m_mdata.setId(mid);
 			m_mdata.setMessage_id(mmid);
-			m_mdata.setTitle(title);
+			m_mdata.setServer_message_id(smid);
 			m_mdata.setContent(content);
 			m_mdata.setDate(date);
 			m_mdata.setType(type);
@@ -140,13 +140,13 @@ public class MessageMetaDataHelper implements IHelperActions<MessageMetaData>{
 			do{
 				long id = c.getLong(c.getColumnIndex(FIELD_ID));
 				long m_id = c.getLong(c.getColumnIndex(FIELD_MESSAGE_ID));
-				String title  = c.getString(c.getColumnIndex(FIELD_TITLE));
+				long sm_id = c.getLong(c.getColumnIndex(FIELD_SERVER_MESSAGE_ID));
 				String content = c.getString(c.getColumnIndex(FIELD_CONTENT));
 				String date = c.getString(c.getColumnIndex(FIELD_DATE));
 				int type = c.getInt(c.getColumnIndex(FIELD_TYPE));
 				int status = c.getInt(c.getColumnIndex(FIELD_STATUS));
 				
-				lists.add(new MessageMetaData(id , m_id , title , content , date, type, status));
+				lists.add(new MessageMetaData(id , m_id ,sm_id , content , date, type, status));
 				
 			}while(c.moveToNext());
 		}

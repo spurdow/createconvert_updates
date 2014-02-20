@@ -7,7 +7,7 @@ public class MessageMetaData {
 	
 	private long id;
 	private long message_id;
-	private String title;
+	private long server_message_id;
 	private String content;
 	private String date;
 	private int type;
@@ -18,12 +18,12 @@ public class MessageMetaData {
 		this.type = type;
 	}
 	private int status;
-	public MessageMetaData(long id, long message_id, String title,
+	public MessageMetaData(long id, long message_id, long server_message_id , 
 			String content, String date,int type, int status) {
 		super();
 		this.id = id;
 		this.message_id = message_id;
-		this.title = title;
+		this.server_message_id = server_message_id;
 		this.content = content;
 		this.date = date;
 		this.type = type;
@@ -44,12 +44,7 @@ public class MessageMetaData {
 	public void setMessage_id(long message_id) {
 		this.message_id = message_id;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
+
 	public String getContent() {
 		return content;
 	}
@@ -67,6 +62,12 @@ public class MessageMetaData {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public long getServer_message_id() {
+		return server_message_id;
+	}
+	public void setServer_message_id(long server_message_id) {
+		this.server_message_id = server_message_id;
 	}
 	
 	

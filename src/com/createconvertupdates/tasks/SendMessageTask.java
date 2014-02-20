@@ -20,9 +20,17 @@ import org.json.JSONObject;
 import com.createconvertupdates.adapters.MessageMetaDataAdapter;
 import com.createconvertupdates.commons.ConnectionDetector;
 import com.createconvertupdates.commons.Utilities;
+import com.createconvertupdates.dbentities.MessageHelper;
+import com.createconvertupdates.dbentities.MessageMetaDataHelper;
 import com.createconvertupdates.entities.Customer;
+import com.createconvertupdates.entities.Message;
+import com.createconvertupdates.entities.MessageMetaData;
 
+import android.R;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -35,15 +43,16 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 
 	private static final String TAG = "SendMessageTask";
 	private Context mContext;
-
+	private AlertDialog alert;
 	private String email;
 
 	
-	public SendMessageTask(Context context){
+	public SendMessageTask(Context context, AlertDialog alert){
 		this.mContext = context;
-
+		this.alert = alert;
 	}
-	
+
+
 	@Override
 	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
@@ -54,8 +63,9 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 		
 		Log.d(TAG, params[0]);
 		list.add(new BasicNameValuePair(TAG_EMAIL , customer.getEmail()));
-		list.add(new BasicNameValuePair(TAG_MESSAGE_TITLE  ,  params[1]));
-		list.add(new BasicNameValuePair(TAG_MESSAGE_CONTENT , params[2]));
+		list.add(new BasicNameValuePair(TAG_MESSAGE_TITLE  ,  params[0]));
+		list.add(new BasicNameValuePair(TAG_MESSAGE_CONTENT , params[1]));
+		list.add(new BasicNameValuePair("message_type" , params[2]));
 		
 		
 		
@@ -95,7 +105,6 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 
 		if(result != null){
 			Log.d(TAG, result);
-			this.publishProgress("Message Sending Success...");
 			try {
 				JSONObject jsonObject = new JSONObject(result);
 				
@@ -103,6 +112,70 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 				String tag_message = jsonObject.getString(TAG_MESSAGE_RESULT);
 				JSONArray jsonArray = jsonObject.getJSONArray(TAG_DATA_RESULT);
 				
+				
+				
+				if(tag_result.equals("success")){
+					
+					//MessageHelper mHelper = new MessageHelper(mContext);
+					Message m = new Message();
+					MessageMetaData mm = new MessageMetaData();
+					
+					JSONObject jObject = jsonArray.getJSONObject(0);
+						
+					JSONObject message = jObject.getJSONObject("message");
+					JSONObject message_metadata = jObject.getJSONObject("message_metadata");
+					
+					mm.setContent(message_metadata.getString("content"));
+					mm.setDate(message_metadata.getString("created_at"));
+					mm.setServer_message_id(Long.parseLong(message_metadata.getString("server_message_id")));
+					mm.setType(Integer.parseInt(message_metadata.getString("message_type")));
+					mm.setStatus(Integer.parseInt(message_metadata.getString("status")));
+					
+					m.setHeader(message.getString("header"));
+					m.setStatus(Integer.parseInt(message.getString("status")));
+					
+					MessageHelper mHelper = new MessageHelper(mContext);
+					long mm_id = mHelper.add(m);
+					mm.setMessage_id(mm_id);
+					MessageMetaDataHelper mmHelper = new MessageMetaDataHelper(mContext);
+					mmHelper.add(mm);
+					
+					
+					AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+					builder.setIcon(R.drawable.btn_plus)
+					.setTitle("Message Sent!")
+					.setMessage(tag_message);
+					AlertDialog dialog = builder.create();
+					
+					dialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new Dialog.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog1, int which) {
+							// TODO Auto-generated method stub
+							dialog1.dismiss();
+							alert.dismiss();
+						}
+						
+					});
+					dialog.show();
+				}else{
+					AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+					builder.setIcon(R.drawable.btn_plus)
+					.setTitle("Message Failed!")
+					.setMessage(tag_message);
+					AlertDialog dialog = builder.create();
+					
+					dialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new Dialog.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog1, int which) {
+							// TODO Auto-generated method stub
+							dialog1.dismiss();
+						}
+						
+					});
+					dialog.show();
+				}
 				
 				
 				

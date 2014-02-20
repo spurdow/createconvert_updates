@@ -5,6 +5,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,16 +18,19 @@ import com.createconvertupdates.commons.AfterTextChanged;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.MessageMetaDataHelper;
 import com.createconvertupdates.entities.MessageMetaData;
+import com.createconvertupdates.tasks.SendMessageMetaDataTask;
 
 public class MessageFragment extends SherlockFragmentActivity {
 
 	
+	private static final String TAG = MessageFragment.class.getName();
 	private ListView mListView;
 	private ActionBar mBar;
 	private EditText mContent;
 	private Button mSend;
 	private MessageMetaDataAdapter mAdapter;
 	private long message_id;
+	private long server_message_id;
 	private String title;
 	
 	@Override
@@ -56,6 +60,7 @@ public class MessageFragment extends SherlockFragmentActivity {
 			
 		});
 		
+		
 		Bundle extras = getIntent().getExtras();
 		
 		message_id  = extras.getLong("message_id");
@@ -66,15 +71,10 @@ public class MessageFragment extends SherlockFragmentActivity {
 		
 		List<MessageMetaData> message_metadata = mm_dh.getAll(message_id);
 		
-		if(message_metadata.size() <= 0){
-			message_metadata.add(new MessageMetaData(1 , message_id, title, "hello" , "12-20-2014" , 0 , 1));
-			message_metadata.add(new MessageMetaData(1 , message_id, title, "asdsadas" , "12-20-2014" , 0 , 1));
-			message_metadata.add(new MessageMetaData(1 , message_id, title, "asdsada" , "12-20-2014" , 0 , 1));
-			message_metadata.add(new MessageMetaData(1 , message_id, title, "hasds" , "12-20-2014" , 0 , 1));
-			message_metadata.add(new MessageMetaData(1 , message_id, title, "22222222" , "12-20-2014" , 0 , 1));
-			message_metadata.add(new MessageMetaData(1 , message_id, title, "33333333" , "12-20-2014" , 0 , 1));
-		}
+		server_message_id = message_metadata.get(0).getServer_message_id();
 		
+		Log.d(TAG, message_metadata.size() + " ");
+
 		mAdapter = new MessageMetaDataAdapter(this , message_metadata);
 		
 		
@@ -89,11 +89,14 @@ public class MessageFragment extends SherlockFragmentActivity {
 		mBar.setDisplayHomeAsUpEnabled(true);
 	}
 	
-	
+	private SendMessageMetaDataTask sendMessage = null;
 	public void sendMessage(View v){
 		String content = mContent.getText().toString().trim();
 		if(Utilities.isValidString(content)){
-			mAdapter.add(new MessageMetaData(1, message_id, title  , content , "12-20-2014" , (Math.random() > 0.5f)? 0: 1 , 1 ) );
+			//mAdapter.add(new MessageMetaData(1, message_id , content , "12-20-2014" , (Math.random() > 0.5f)? 0: 1 , 1 ) );
+			
+			sendMessage = new SendMessageMetaDataTask(this, mAdapter);
+			sendMessage.execute(content, String.valueOf(server_message_id) , String.valueOf(MessageMetaData.MINE) , String.valueOf(message_id));
 			mListView.setSelection(mAdapter.getCount() - 1);
 			mContent.setText("");
 		}

@@ -165,6 +165,7 @@ public class LoginTask extends AsyncTask<Void , Void , String>{
 						// TODO Auto-generated method stub
 						dialog1.dismiss();
 						Intent i = new Intent(context , HomeFragmentActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(i);
 					}
 					
