@@ -113,7 +113,7 @@ public class Utilities {
 	public final static int PROJECT_TABLE_NOTIFICATION = 0x01;
 	public final static int MESSAGE_NOTIFICATION = 0x02;
 	public final static int PROJECT_METADATA_NOTIFICATION = 0x03;
-	
+	public final static int MESSAGE_METADATA_NOTIFICATION = 0x04;
 	/**
 	 *  Other tags
 	 */

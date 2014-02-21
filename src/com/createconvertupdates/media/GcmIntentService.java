@@ -102,7 +102,10 @@ public class GcmIntentService extends IntentService {
 				generateProjectTableNotification(extras , notification_id);
 			break;
 		case Utilities.MESSAGE_NOTIFICATION: 
-				
+			generateMessageNotification(extras , notification_id);	
+			break;
+		case Utilities.MESSAGE_METADATA_NOTIFICATION:
+			generateMessageMetaDataNotification(extras , notification_id);
 			break;
 		case Utilities.PROJECT_METADATA_NOTIFICATION: 
 				generateProjectUpdatesNotification(extras , notification_id);
@@ -112,10 +115,19 @@ public class GcmIntentService extends IntentService {
 	}
 	
 	private void generateMessageNotification(Bundle extras , int notification_id){
+/*		if(Boolean.valueOf(extras.getString("notify"))){
+			//MessageHelper mMessageHelper = new MessageHelper(this.getApplicationContext());
+			
+			
+			
+		}*/
+		Log.d(TAG, "Not yet implemented");
+	}
+	
+	
+	
+	private void generateMessageMetaDataNotification(Bundle extras, int notification_id){
 		if(Boolean.valueOf(extras.getString("notify"))){
-			MessageHelper mMessageHelper = new MessageHelper(this.getApplicationContext());
-			
-			
 			
 		}
 	}
