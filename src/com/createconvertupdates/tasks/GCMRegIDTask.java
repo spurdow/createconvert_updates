@@ -40,7 +40,7 @@ public class GCMRegIDTask extends AsyncTask<Void , Void , String>{
 	private Customer customer;
 	private GoogleCloudMessaging gcm;
 	private String regid;
-	private ProgressDialog dialog ;
+
 	public GCMRegIDTask(Context context , Customer customer){
 		this.context = context;
 		this.customer = customer;
@@ -98,7 +98,7 @@ public class GCMRegIDTask extends AsyncTask<Void , Void , String>{
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
-		dialog.dismiss();
+
 		try {
 			JSONObject jsonObject = new JSONObject(result);
 			
@@ -129,13 +129,10 @@ public class GCMRegIDTask extends AsyncTask<Void , Void , String>{
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
-		dialog = new ProgressDialog(context);
-		dialog.setMessage("Please wait while we configure your device.");
-		dialog.setIndeterminate(true);
-		dialog.show();
+
 		
 		if(!ConnectionDetector.isConnectedToInternet(context)){
-			dialog.hide();
+
 			this.cancel(true);
 		}
 	}

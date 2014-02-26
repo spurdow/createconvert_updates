@@ -82,6 +82,7 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 			 */
 			GCMRegIDTask task = new GCMRegIDTask(HomeFragmentActivity.this, customer);
 			task.execute(null, null, null);
+			
 		}
 		
 		/*

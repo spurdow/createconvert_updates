@@ -55,7 +55,7 @@ public class GcmIntentService extends IntentService {
         // The getMessageType() intent parameter must be the intent you received
         // in your BroadcastReceiver.
         String messageType = gcm.getMessageType(intent);
-        Log.d("INTENT SERVICE", "Handled Intent CALLED");
+        Log.d("INTENT SERVICE", "Handled Intent CALLED " + extras.isEmpty());
 
         if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             /*
@@ -64,29 +64,36 @@ public class GcmIntentService extends IntentService {
              * any message types you're not interested in, or that you don't
              * recognize.
              */
+        	Log.d(TAG, messageType.toLowerCase().toString());
             if (GoogleCloudMessaging.
                     MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
+            	Log.d(TAG , "error");
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_DELETED.equals(messageType)) {
+            	Log.d(TAG , "deleted");
             // If it's a regular GCM message, do some work.
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
+            	Log.d(TAG , "message");
             	/**
             	 *  generate notification only if notify is not null 
             	 *  and notify is true
             	 */
-            	
-            	Log.d("DAVID", "vsadgsajhasdcdfvgbhnjkmcfvgbhnjkmcfvgbhnjfcvgbhjnkmcfgvbhnd");
-            	Log.d(TAG,  extras.getString("notify") + "-" + Boolean.valueOf(extras.getString("notify")));
+            	Log.d(TAG, "someting");
+
             	if(extras.getString("notify") != null && Boolean.valueOf(extras.getString("notify"))){
 	            	if(extras.getString("notification_id") != null){
 	            		generateNotification(Integer.valueOf(extras.getString("notification_id")) , extras);
 	            	}
             	}
-
                 Log.i(TAG, "Received: " + extras.toString());
+            }else{
+            	Log.d(TAG , "wa ko kbaw");
             }
+        }else{
+        	Log.e(TAG, "boangon!");
         }
+        
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         Log.d("INTENT SERVICE", "CoMplete WAKEFUL");
         GcmBroadcastReceiver.completeWakefulIntent(intent);
