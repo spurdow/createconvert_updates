@@ -334,8 +334,9 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 					String message_content = m_content.getText().toString();
 					String message_type = MessageMetaData.MINE + "";
 					
+					
 					SendMessageTask mMessageTask = new SendMessageTask(HomeFragmentActivity.this , alert);
-					mMessageTask.execute(message_title, message_content , message_type);
+					mMessageTask.execute(message_title, message_content , message_type  );
 					
 					
 				}

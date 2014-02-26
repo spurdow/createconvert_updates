@@ -2,9 +2,13 @@ package com.createconvertupdates.media;
 
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +18,11 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.createconvertupdates.adapters.MessageMetaDataAdapter;
+import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
 import com.createconvertupdates.commons.AfterTextChanged;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.MessageMetaDataHelper;
+import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.tasks.SendMessageMetaDataTask;
 
@@ -32,6 +38,7 @@ public class MessageFragment extends SherlockFragmentActivity {
 	private long message_id;
 	private long server_message_id;
 	private String title;
+	private UpdateReceiver mreceiver;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -77,6 +84,7 @@ public class MessageFragment extends SherlockFragmentActivity {
 
 		mAdapter = new MessageMetaDataAdapter(this , message_metadata);
 		
+		mreceiver = new UpdateReceiver(mAdapter);
 		
 		mListView.setAdapter(mAdapter);
 		
@@ -102,5 +110,54 @@ public class MessageFragment extends SherlockFragmentActivity {
 		}
 	}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		/*
+		 *  register a update reciever
+		 */
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(mreceiver);
+		super.onPause();
+		
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		/*
+		 *  register a update reciever
+		 */
+		LocalBroadcastManager.getInstance(this).registerReceiver(mreceiver,
+				new IntentFilter("new_message"));
+		super.onResume();
+	}
+	
+	private class UpdateReceiver extends BroadcastReceiver{
+		
+		private MessageMetaDataAdapter adapter;
+		
+		public UpdateReceiver(MessageMetaDataAdapter adapter){
+			this.adapter = adapter;
+		}
+		
+		/*
+		 *  local broadcast reciever
+		 */
+		@Override
+		public void onReceive(final Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			
+			
+			final long id = intent.getLongExtra("id", -1);
+			final long m_id = intent.getLongExtra("message_id", -1);
+			/*
+			 *  if there is a record then update the adapter
+			 */
+			Log.d(TAG, id + " Updating... Projects Messages");
+			MessageMetaDataHelper mmHelper = new MessageMetaDataHelper(context);
+			adapter.add(mmHelper.get(id, m_id));
+			
+		}
+		
+	}
 	
 }

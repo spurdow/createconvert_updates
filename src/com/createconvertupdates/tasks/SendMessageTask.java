@@ -31,8 +31,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -61,11 +63,18 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 		
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		
-		Log.d(TAG, params[0]);
+		Message mess = new Message();
+		mess.setHeader(params[0]);
+		mess.setStatus(0);
+		MessageHelper mHelper = new MessageHelper(this.mContext);
+		long cmid = mHelper.add(mess);
+		
+		//Log.d(TAG, params[0]);
 		list.add(new BasicNameValuePair(TAG_EMAIL , customer.getEmail()));
 		list.add(new BasicNameValuePair(TAG_MESSAGE_TITLE  ,  params[0]));
 		list.add(new BasicNameValuePair(TAG_MESSAGE_CONTENT , params[1]));
 		list.add(new BasicNameValuePair("message_type" , params[2]));
+		list.add(new BasicNameValuePair("client_message_id"  , String.valueOf(cmid)));
 		
 		
 		
@@ -110,6 +119,7 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 				
 				String tag_result = jsonObject.getString(TAG_MESSAGE_METADATA_RESULT);
 				String tag_message = jsonObject.getString(TAG_MESSAGE_RESULT);
+				long client_message_id = Long.parseLong(jsonObject.getString("client_message_id"));
 				JSONArray jsonArray = jsonObject.getJSONArray(TAG_DATA_RESULT);
 				
 				
@@ -125,6 +135,8 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 					JSONObject message = jObject.getJSONObject("message");
 					JSONObject message_metadata = jObject.getJSONObject("message_metadata");
 					
+					
+					
 					mm.setContent(message_metadata.getString("content"));
 					mm.setDate(message_metadata.getString("created_at"));
 					mm.setServer_message_id(Long.parseLong(message_metadata.getString("server_message_id")));
@@ -135,13 +147,19 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 					m.setStatus(Integer.parseInt(message.getString("status")));
 					
 					MessageHelper mHelper = new MessageHelper(mContext);
-					long mm_id = mHelper.add(m);
-					mm.setMessage_id(mm_id);
+					mHelper.update(client_message_id, m);
+					mm.setMessage_id(client_message_id);
 					MessageMetaDataHelper mmHelper = new MessageMetaDataHelper(mContext);
 					mmHelper.add(mm);
 					
 					
-					AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+					
+					
+		    		Intent i = new Intent("new_message_");
+		    		i.putExtra("id", client_message_id);
+		    		LocalBroadcastManager.getInstance(this.mContext).sendBroadcast(i);
+					
+		    		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 					builder.setIcon(R.drawable.btn_plus)
 					.setTitle("Message Sent!")
 					.setMessage(tag_message);

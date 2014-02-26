@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.MessageHelper;
+import com.createconvertupdates.dbentities.MessageMetaDataHelper;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
+import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.entities.ProjectMetaData;
 import com.createconvertupdates.media.R;
@@ -73,6 +75,7 @@ public class GcmIntentService extends IntentService {
             	 *  generate notification only if notify is not null 
             	 *  and notify is true
             	 */
+            	Log.d(TAG,  extras.getString("notify") + "-" + Boolean.valueOf(extras.getString("notify")));
             	if(extras.getString("notify") != null && Boolean.valueOf(extras.getString("notify"))){
 	            	if(extras.getString("notification_id") != null){
 	            		generateNotification(Integer.valueOf(extras.getString("notification_id")) , extras);
@@ -95,6 +98,7 @@ public class GcmIntentService extends IntentService {
 	private void generateNotification(int notification_id , Bundle extras){
 		mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		if(extras == null) return;
+		Log.d("BOANG", "BOANG");
 		if(extras.getString("notify") == null) return;
 		
 		switch(notification_id){
@@ -105,6 +109,7 @@ public class GcmIntentService extends IntentService {
 			generateMessageNotification(extras , notification_id);	
 			break;
 		case Utilities.MESSAGE_METADATA_NOTIFICATION:
+			
 			generateMessageMetaDataNotification(extras , notification_id);
 			break;
 		case Utilities.PROJECT_METADATA_NOTIFICATION: 
@@ -127,8 +132,55 @@ public class GcmIntentService extends IntentService {
 	
 	
 	private void generateMessageMetaDataNotification(Bundle extras, int notification_id){
+		Log.d(TAG, "test message metadata");
 		if(Boolean.valueOf(extras.getString("notify"))){
+			Log.d(TAG, extras.toString() + " oh nose!");
 			
+			String content = extras.getString("content");
+			String created_at = extras.getString("created_at");
+			long server_message_id = Long.parseLong(extras.getString("server_message_id"));
+			long client_message_id = Long.parseLong(extras.getString("message_id"));
+			int message_type = Integer.parseInt(extras.getString("message_type"));
+			int status = Integer.parseInt(extras.getString("status"));
+			
+			MessageMetaData mmData = new MessageMetaData();
+			mmData.setContent(content);
+			mmData.setDate(created_at);
+			mmData.setServer_message_id(server_message_id);
+			mmData.setMessage_id(client_message_id);
+			mmData.setType(message_type);
+			mmData.setStatus(status);
+			
+			MessageMetaDataHelper mmHelper = new MessageMetaDataHelper(this.getApplicationContext());
+			long id = mmHelper.add(mmData);
+			
+    		/*
+    		 *  send broadcast to messages
+    		 */
+    		Intent i = new Intent("new_message");
+    		i.putExtra("id", id);
+    		i.putExtra("message_id", mmData.getMessage_id());
+    		LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+			
+			
+			
+    		Intent intent = new Intent(this , HomeFragmentActivity.class);
+    		intent.putExtra(TAG_PROJECTS,notification_id);
+    		intent.putExtra("state", 2);
+    		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+			
+    		/*
+    		 *  notification side
+    		 */
+            final NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(this)
+            //.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher))
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle("Create Convert Media ltd.")
+            .setContentText("You've got message!");
+            
+            mBuilder.setContentIntent(contentIntent);
+            mNotificationManager.notify(notification_id, mBuilder.build());
 		}
 	}
 
