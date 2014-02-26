@@ -61,7 +61,6 @@ public class ProjectMetaDataAdapter extends AbstractListAdapter<ProjectMetaData>
 			viewHolder = new ViewHolder();
 			viewHolder.message = (TextView) child.findViewById(R.id.md_message);
 			viewHolder.date = (TextView) child.findViewById(R.id.md_date);
-			viewHolder.status = (TextView) child.findViewById(R.id.md_status);
 			
 			child.setTag(viewHolder);
 		}else{
@@ -72,8 +71,7 @@ public class ProjectMetaDataAdapter extends AbstractListAdapter<ProjectMetaData>
 		viewHolder.date.setText(list.get(position).getDate_received());
 		
 		if(list.get(position).getStatus() == 1){
-			viewHolder.status.setText("new");
-			viewHolder.status.setTextColor(Color.GREEN);
+			child.setBackgroundResource(R.drawable.tab_unselected_focused_createconvert);
 		}
 		
 		return child;
@@ -82,7 +80,6 @@ public class ProjectMetaDataAdapter extends AbstractListAdapter<ProjectMetaData>
 	public class ViewHolder{
 		TextView message;
 		TextView date;
-		TextView status;
 	}
 
 	@Override

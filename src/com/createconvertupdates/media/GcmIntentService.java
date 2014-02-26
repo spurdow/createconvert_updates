@@ -15,6 +15,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -187,8 +188,11 @@ public class GcmIntentService extends IntentService {
             .setContentTitle("Create Convert Media ltd.")
             .setContentText("You've got message!");
             
+            final Notification notif = mBuilder.build();
+            notif.flags |= Notification.FLAG_AUTO_CANCEL;
+            
             mBuilder.setContentIntent(contentIntent);
-            mNotificationManager.notify(notification_id, mBuilder.build());
+            mNotificationManager.notify(notification_id, notif);
 		}
 	}
 
@@ -259,8 +263,11 @@ public class GcmIntentService extends IntentService {
             .setNumber(count)
             .setContentText(contentText);
             
+            final Notification notif = mBuilder.build();
+            notif.flags |= Notification.FLAG_AUTO_CANCEL;
+            
             mBuilder.setContentIntent(contentIntent);
-            mNotificationManager.notify(notification_id, mBuilder.build());
+            mNotificationManager.notify(notification_id, notif);
    		}
 	}
 	
@@ -311,9 +318,11 @@ public class GcmIntentService extends IntentService {
             .setContentTitle("Create Convert Media ltd.")
             .setContentText(getProject.getName() + " updated!");
             
+            final Notification notif = mBuilder.build();
+            notif.flags |= Notification.FLAG_AUTO_CANCEL;
             
             mBuilder.setContentIntent(contentIntent);
-            mNotificationManager.notify(notification_id, mBuilder.build());
+            mNotificationManager.notify(notification_id, notif);
 		}
 	}
 	
