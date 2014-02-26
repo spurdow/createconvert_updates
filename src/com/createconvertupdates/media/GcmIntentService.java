@@ -87,11 +87,7 @@ public class GcmIntentService extends IntentService {
 	            	}
             	}
                 Log.i(TAG, "Received: " + extras.toString());
-            }else{
-            	Log.d(TAG , "wa ko kbaw");
             }
-        }else{
-        	Log.e(TAG, "boangon!");
         }
         
         // Release the wake lock provided by the WakefulBroadcastReceiver.

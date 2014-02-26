@@ -64,7 +64,7 @@ public class ProjectFragment extends SherlockFragmentActivity implements IImageD
 		TextView website = (TextView) header.findViewById(R.id.project_link);
 		
 		website.setMovementMethod(LinkMovementMethod.getInstance());
-		website.setText( project.getWebsite() );
+		website.setText(Html.fromHtml("<a href=\'" + project.getWebsite() + "\' > View Website </a>"));
 		
 		slogan.setText(project.getSlogan());
 		

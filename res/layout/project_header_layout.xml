@@ -35,6 +35,7 @@
         android:layout_marginTop="21dp"
         android:layout_toRightOf="@+id/project_header_image"
         android:maxLength="50"
+        android:paddingBottom="10dip"
         android:singleLine="false"
         android:text="TextView" />
 
