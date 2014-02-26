@@ -64,7 +64,6 @@ public class GcmIntentService extends IntentService {
              * any message types you're not interested in, or that you don't
              * recognize.
              */
-        	Log.d(TAG, messageType.toLowerCase().toString());
             if (GoogleCloudMessaging.
                     MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
             	Log.d(TAG , "error");
@@ -148,8 +147,8 @@ public class GcmIntentService extends IntentService {
 			String content = extras.getString("content");
 			String created_at = extras.getString("created_at");
 			long server_message_id = Long.parseLong(extras.getString("server_message_id"));
-			long client_message_id = Long.parseLong(extras.getString("message_id"));
-			int message_type = Integer.parseInt(extras.getString("message_type"));
+			long client_message_id = Long.parseLong(extras.getString("client_id"));
+			int message_type = Integer.parseInt(extras.getString("type"));
 			int status = Integer.parseInt(extras.getString("status"));
 			
 			MessageMetaData mmData = new MessageMetaData();

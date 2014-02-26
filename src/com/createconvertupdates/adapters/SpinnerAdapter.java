@@ -78,7 +78,7 @@ public class SpinnerAdapter extends AbstractListAdapter<MessageProject> implemen
 			 *  download the weak reference bitmap image for imageview
 			 */
 			// remove this when online
-			String replace = mprojects.getImagePath().replace("http://localhost/", Utilities.HOST_NAME);
+			String replace = mprojects.getImagePath();
 			//
 			mprojects.setImagePath(replace);
 			download(mprojects.getImagePath() , holder.image);

@@ -82,11 +82,11 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		
 		Log.d(TAG, projects.get(position).getDate() + "  = date ");
 		
-		if(count == 0) count = 20;
-		
-		holder.status_items.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-		holder.status_items.setText(String.valueOf(count));
-		holder.status_items.show();
+		if(count > 0) {
+			holder.status_items.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+			holder.status_items.setText(String.valueOf(count));
+			holder.status_items.show();
+		}
 		/*
 		holder.status.setBadgePosition(BadgeView.POSITION_BOTTOM_RIGHT);
 		holder.status.setText("new");
@@ -96,7 +96,7 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 		 *  download the weak reference bitmap image for imageview
 		 */
 		// remove this when online
-		String replace = projects.get(position).getImagePath().replace("http://localhost/", Utilities.HOST_NAME);
+		String replace = projects.get(position).getImagePath();
 		
 		projects.get(position).setImagePath(replace);
 		download(projects.get(position).getImagePath() , holder.image);

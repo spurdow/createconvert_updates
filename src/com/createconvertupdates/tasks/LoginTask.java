@@ -151,26 +151,14 @@ public class LoginTask extends AsyncTask<Void , Void , String>{
 				 */
 				savePreferences(context , customer);
 				
-				
-				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setIcon(R.drawable.btn_plus)
-				.setTitle("Login Success")
-				.setMessage(tag_message);
-				AlertDialog dialog = builder.create();
-				
-				dialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new Dialog.OnClickListener(){
+	
 
-					@Override
-					public void onClick(DialogInterface dialog1, int which) {
-						// TODO Auto-generated method stub
-						dialog1.dismiss();
-						Intent i = new Intent(context , HomeFragmentActivity.class);
-						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-						context.startActivity(i);
-					}
-					
-				});
-				dialog.show();
+
+				Intent i = new Intent(context , HomeFragmentActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(i);
+
+
 
 			}
 			
