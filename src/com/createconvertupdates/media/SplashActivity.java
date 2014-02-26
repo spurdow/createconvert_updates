@@ -213,7 +213,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 					// TODO Auto-generated method stub
 					if(!isValidString(s.toString())){
 						error = true;
-						fname_error.setText("Oops No Nose!");
+						fname_error.setText("Firstname should be filled up!");
 						
 					}else{
 						error = false;
@@ -235,7 +235,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 					// TODO Auto-generated method stub
 					if(!isValidString(s.toString())){
 						error = true;
-						lname_error.setText("Oops No Nose!");
+						lname_error.setText("Last name should be filled up!");
 						
 					}else{
 						error = false;
@@ -255,7 +255,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 					// TODO Auto-generated method stub
 					if(!isValidString(s.toString())){
 						error = true;
-						mname_error.setText("Oops No Nose!");
+						mname_error.setText("MiddleName should be filled up!");
 						
 					}else{
 						error = false;
@@ -275,7 +275,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 					// TODO Auto-generated method stub
 					if(!isValidString(s.toString()) || !isValidUsername(s.toString())){
 						error = true;
-						username_error.setText("Oops No Nose!");
+						username_error.setText("Username should be filled up!");
 						
 					}else{
 						error = false;
@@ -340,7 +340,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 					}
 					else if(!isValidString(s.toString()) || !isValidUsername(s.toString())){
 						error = true;
-						email_error.setText("Oops No Nose!");
+						email_error.setText("Invalid !");
 						
 					}else{
 						error = false;
@@ -377,7 +377,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 					
 					if(!isValidPassword2Password(list.get(4), list.get(5))){
 						error = true;
-						password_c_error.setText("Password does not match");
+						password_c_error.setText("Password do not match");
 					}
 					
 					

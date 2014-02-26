@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -62,8 +63,8 @@ public class ProjectFragment extends SherlockFragmentActivity implements IImageD
 		TextView slogan = (TextView) header.findViewById(R.id.project_header_slogan);
 		TextView website = (TextView) header.findViewById(R.id.project_link);
 		
-		
-		website.setText(Html.fromHtml("<a href=\'" + project.getWebsite() + "\' > View Website </a>"));
+		website.setMovementMethod(LinkMovementMethod.getInstance());
+		website.setText( project.getWebsite() );
 		
 		slogan.setText(project.getSlogan());
 		

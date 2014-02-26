@@ -13,6 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/project_header_slogan"
         android:layout_marginLeft="17dp"
+        android:paddingBottom="20dip"
         android:src="@drawable/ic_launcher" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/project_header_image"
         android:layout_alignLeft="@+id/project_header_slogan"
+        android:paddingBottom="20dip"
         android:text="@string/string_links"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

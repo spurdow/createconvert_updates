@@ -192,6 +192,7 @@ public class GcmIntentService extends IntentService {
             notif.flags |= Notification.FLAG_AUTO_CANCEL;
             
             mBuilder.setContentIntent(contentIntent);
+            mBuilder.setAutoCancel(true);
             mNotificationManager.notify(notification_id, notif);
 		}
 	}
@@ -267,6 +268,7 @@ public class GcmIntentService extends IntentService {
             notif.flags |= Notification.FLAG_AUTO_CANCEL;
             
             mBuilder.setContentIntent(contentIntent);
+            mBuilder.setAutoCancel(true);
             mNotificationManager.notify(notification_id, notif);
    		}
 	}
@@ -319,9 +321,11 @@ public class GcmIntentService extends IntentService {
             .setContentText(getProject.getName() + " updated!");
             
             final Notification notif = mBuilder.build();
+           
             notif.flags |= Notification.FLAG_AUTO_CANCEL;
             
             mBuilder.setContentIntent(contentIntent);
+            mBuilder.setAutoCancel(true);
             mNotificationManager.notify(notification_id, notif);
 		}
 	}
