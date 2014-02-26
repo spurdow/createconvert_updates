@@ -43,7 +43,7 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 		}else{
 			holder = (ViewHolder) child.getTag();
 		}
-		
+		holder.count.setVisibility(View.INVISIBLE);
 		
 		
 		int count = 0;
