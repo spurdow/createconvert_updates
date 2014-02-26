@@ -45,6 +45,9 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 		}
 		holder.count.setVisibility(View.INVISIBLE);
 		
+		if(lists.get(position).getStatus() == 1){
+			child.setBackgroundResource(R.drawable.tab_unselected_focused_createconvert);
+		}
 		
 		int count = 0;
 		if(lists.get(position).getList() != null){

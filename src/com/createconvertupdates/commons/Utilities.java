@@ -71,7 +71,7 @@ public class Utilities {
 	/**
 	 *  php folder for the current site
 	 */
-	public final static String PHP_FOLDER = "ccupdates/";
+	public final static String PHP_FOLDER = "";
 	
 	/**
 	 *  PROPERTY REGISTRATION ID
