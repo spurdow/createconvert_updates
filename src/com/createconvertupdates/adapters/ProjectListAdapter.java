@@ -18,6 +18,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -185,6 +187,8 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 						if(p.getName().toString().toLowerCase().startsWith(constraint.toString()) ||
 						   p.getSlogan().toString().toLowerCase().startsWith(constraint.toString()) ||
 						   p.getWebsite().toString().toLowerCase().startsWith(constraint.toString())){
+							
+							
 							filteredList.add(p);
 						}
 						filterResults.count = filteredList.size();
@@ -204,6 +208,8 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 				// TODO Auto-generated method stub
 				setList((List<Project>) results.values);
 				notifyDataSetChanged();
+				//
+				
 				
 			}
 			

@@ -1,5 +1,6 @@
 package com.createconvertupdates.media;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.createconvertupdates.commons.Utilities;
@@ -125,21 +126,19 @@ public class GcmIntentService extends IntentService {
 	}
 	
 	private void generateMessageNotification(Bundle extras , int notification_id){
-/*		if(Boolean.valueOf(extras.getString("notify"))){
-			//MessageHelper mMessageHelper = new MessageHelper(this.getApplicationContext());
+		if(Boolean.valueOf(extras.getString("notify"))){
+			MessageHelper mMessageHelper = new MessageHelper(this.getApplicationContext());
 			
 			
 			
-		}*/
+		}
 		Log.d(TAG, "Not yet implemented");
 	}
 	
 	
 	
 	private void generateMessageMetaDataNotification(Bundle extras, int notification_id){
-		Log.d(TAG, "test message metadata");
 		if(Boolean.valueOf(extras.getString("notify"))){
-			Log.d(TAG, extras.toString() + " oh nose!");
 			
 			String content = extras.getString("content");
 			String created_at = extras.getString("created_at");
@@ -166,8 +165,9 @@ public class GcmIntentService extends IntentService {
     		i.putExtra("id", id);
     		i.putExtra("message_id", mmData.getMessage_id());
     		LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
-			
-			
+			HashMap<String , Boolean> hMap = (HashMap<String, Boolean>) Utilities.getSettings(getApplicationContext());
+    		
+			if(!hMap.get("key_1")) return;
 			
     		Intent intent = new Intent(this , HomeFragmentActivity.class);
     		intent.putExtra(TAG_PROJECTS,notification_id);
@@ -225,7 +225,9 @@ public class GcmIntentService extends IntentService {
     		project.setDate(extras.getString("date_created"));
     		project.setStatus(Integer.parseInt(extras.getString("status")));
     		long id = helper.add(project);
-    		Log.d(TAG, project.getWebsite() + " = WEBSITE ");
+			HashMap<String , Boolean> hMap = (HashMap<String, Boolean>) Utilities.getSettings(getApplicationContext());
+    		
+			if(!hMap.get("key_1")) return;
     		
     		/*
     		 *  send broadcast to project updates
@@ -294,6 +296,10 @@ public class GcmIntentService extends IntentService {
     		i.putExtra("project_id", project_id);
     		LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
 			
+			HashMap<String , Boolean> hMap = (HashMap<String, Boolean>) Utilities.getSettings(getApplicationContext());
+    		
+			if(!hMap.get("key_1")) return;
+    		
     		Intent intent = new Intent(this , ProjectFragment.class);
     		intent.putExtra("project_id", project_id);
     		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_ONE_SHOT);

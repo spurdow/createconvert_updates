@@ -21,6 +21,6 @@
     <string name="string_content">Content</string>
     <string name="string_links"><a href="#" > View website </a></string>
     <string name="notify_me_string">Notify me to every updates</string>
-    <string name="logged_me_string">Logged me in automatically</string>
+    <string name="logged_me_string">Logged me in always</string>
 
 </resources>

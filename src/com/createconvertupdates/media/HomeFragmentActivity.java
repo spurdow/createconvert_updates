@@ -1,6 +1,7 @@
 package com.createconvertupdates.media;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -29,6 +30,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -223,6 +227,50 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				startActivity(i);
 			break;
 		case R.id.id_settings: 
+				LayoutInflater inflater = LayoutInflater.from(this);
+				View settings_view = inflater.inflate(R.layout.settings_layout, null);
+				
+				
+				final CheckBox chk_not = (CheckBox) settings_view.findViewById(R.id.settings_chk_notify_me);
+				final CheckBox chk_log = (CheckBox) settings_view.findViewById(R.id.settings_chk_logged_me);
+				final HashMap<String , Boolean> hMap = (HashMap<String, Boolean>) Utilities.getSettings(this);
+				
+				chk_not.setChecked(hMap.get("key_1"));
+				chk_log.setChecked(hMap.get("key_2"));
+				
+				
+				AlertDialog.Builder settings_builder  = new AlertDialog.Builder(this);
+				
+				settings_builder.setView(settings_view);
+				final AlertDialog settings_alert = settings_builder.create();
+				
+				chk_not.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+					@Override
+					public void onCheckedChanged(CompoundButton arg0,
+							boolean arg1) {
+						// TODO Auto-generated method stub
+						hMap.put("key_1", arg1);
+						hMap.remove("key_2");
+						Utilities.savedSettings(HomeFragmentActivity.this, hMap);
+					}
+					
+				});
+				
+				chk_log.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+					@Override
+					public void onCheckedChanged(CompoundButton arg0,
+							boolean arg1) {
+						// TODO Auto-generated method stub
+						hMap.put("key_2", arg1);
+						hMap.remove("key_1");
+						Utilities.savedSettings(HomeFragmentActivity.this, hMap);
+					}
+					
+				});
+				settings_alert.show();
+				
 				
 			break;
 		case R.id.id_compose: 
@@ -367,15 +415,21 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 	}
 
 
-	private boolean isEmptyList(List<MessageProject> lists){
-		for(int i = 1 ; i < lists.size() ; i++){
-			if(lists.get(i).isCheck()){
-				return false;
-			}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		HashMap<String , Boolean> hMap = (HashMap<String, Boolean>)getSettings(this);
+		Log.d(TAG, "back press");
+		if(!hMap.get("key_2")){
+			removeSavedCustomer(this);
 		}
-		return true;
+		
+		super.onBackPressed();
 	}
-	
+
+
+
+
 	
 
 	

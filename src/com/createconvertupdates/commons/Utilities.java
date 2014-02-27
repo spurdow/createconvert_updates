@@ -5,15 +5,22 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.http.AndroidHttpClient;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -121,13 +128,9 @@ public class Utilities {
 	public final static String TAG_MESSAGE_RESULT = "message";
 	public final static String TAG_MESSAGE_METADATA_RESULT = "message_result";
 	public final static String TAG_DATA_RESULT = "data";
-	
-	
-	
+		
 	private static final String TAG = "Utilities";
-	
-
-	
+		
 	/** 
 	 * static bitmap downloader
 	 */
@@ -223,6 +226,69 @@ public class Utilities {
 		
 		return count;
 	}
+	/**
+	 *  check for first launched
+	 */
+	public static boolean isFirstLaunch(Context context){
+		SharedPreferences shared = getPreferences(context);
+		if(shared.getBoolean("first_launch", true)){
+			SharedPreferences.Editor editor = shared.edit();
+			editor.putBoolean("first_launch", false);
+			editor.commit();
+			return true;
+		}
+		return false;
+		
+	}
+	
+	/**
+	 *  Default saving of settings
+	 */
+	public static void savedSettings(Context context){
+		HashMap<String , Boolean> hMap = new HashMap<String , Boolean>();
+		hMap.put("key_1", true );
+		hMap.put("key_2", true );
+	}
+	/**
+	 * save the settings using the map 
+	 * @param context
+	 * @param map
+	 */
+	public static void savedSettings(Context context , Map<String , Boolean> map){
+		SharedPreferences shared = getPreferences(context);
+		SharedPreferences.Editor editor = shared.edit();
+		for(Entry<String , Boolean> entry : map.entrySet()){
+			editor.putBoolean(entry.getKey(), entry.getValue());
+			editor.commit();
+		}
+	}
+	/**
+	 * returns the settings map defaults
+	 * @param context
+	 * @return
+	 */
+	public static Map<String , Boolean> getSettings(Context context ){
+		HashMap<String , Boolean> hMap = new HashMap<String , Boolean>();
+		hMap.put("key_1", false);
+		hMap.put("key_2", false);
+		
+		return getSettings(context, hMap);
+	}
+	/**
+	 * returns the settings
+	 * @param context
+	 * @param container
+	 * @return
+	 */
+	protected static Map<String , Boolean> getSettings(Context context , Map<String , Boolean> container){
+		SharedPreferences shared = getPreferences(context);
+		
+		for(Entry<String , Boolean> entry : container.entrySet()){
+			container.put(entry.getKey(), shared.getBoolean(entry.getKey(), true));
+		}
+		
+		return container;
+	}
 	
 	/**
 	 *  remove customer logging out 
@@ -234,6 +300,7 @@ public class Utilities {
 		editor.remove("id").remove("username")
 		.remove("password").remove("email");
 		editor.commit();
+		Log.d(TAG, "removing customer..");
 	}
 	
 	
