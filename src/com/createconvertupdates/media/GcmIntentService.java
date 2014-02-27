@@ -10,7 +10,7 @@ import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.entities.ProjectMetaData;
-import com.createconvertupdates.media.R;
+import com.createconvertupdates.medialtd.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.annotation.SuppressLint;

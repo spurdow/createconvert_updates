@@ -3,7 +3,7 @@ package com.createconvertupdates.tasks;
 import java.lang.ref.WeakReference;
 
 import com.createconvertupdates.commons.ConnectionDetector;
-import com.createconvertupdates.media.R;
+import com.createconvertupdates.medialtd.R;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;

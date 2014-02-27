@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.MessageProject;
 import com.createconvertupdates.iface.IImageDownload;
-import com.createconvertupdates.media.R;
+import com.createconvertupdates.medialtd.R;
 import com.createconvertupdates.tasks.BitmapDownloaderTask;
 
 import static com.createconvertupdates.commons.Utilities.*;

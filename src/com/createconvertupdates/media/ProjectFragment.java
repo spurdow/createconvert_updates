@@ -19,7 +19,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
+import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
 import com.createconvertupdates.dbentities.ProjectHelper;
@@ -27,15 +30,17 @@ import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.entities.ProjectMetaData;
 import com.createconvertupdates.iface.IImageDownload;
+import com.createconvertupdates.medialtd.R;
 import com.createconvertupdates.tasks.BitmapDownloaderTask;
 
-public class ProjectFragment extends SherlockFragmentActivity implements IImageDownload{
+public class ProjectFragment extends SherlockFragmentActivity implements IImageDownload, OnQueryTextListener{
 
 	
 	public static final String TAG = "ProjectFragment";
 	private ListView listView;
 	private UpdateReceiver mreceiver;
 	private ActionBar mBar;
+	private ProjectMetaDataAdapter mAdapter;
 	
 	
 	@Override
@@ -82,11 +87,11 @@ public class ProjectFragment extends SherlockFragmentActivity implements IImageD
 		List<ProjectMetaData> pmdLists = pmdHelper.getAll(p_id);
 
 		
-		ProjectMetaDataAdapter adapter= new ProjectMetaDataAdapter(this , pmdLists);
+		mAdapter = new ProjectMetaDataAdapter(this , pmdLists);
 		
-		mreceiver = new UpdateReceiver(adapter);
+		mreceiver = new UpdateReceiver(mAdapter);
 		
-		listView.setAdapter(adapter);
+		listView.setAdapter(mAdapter);
 		
 		
 		mBar = getSupportActionBar();
@@ -166,6 +171,36 @@ public class ProjectFragment extends SherlockFragmentActivity implements IImageD
 		BitmapDownloaderTask task = new BitmapDownloaderTask(view);
 		task.execute(url);
 		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		//MenuInflater inflater = this.getSupportMenuInflater();
+		
+		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.search_only,  menu);
+		
+		MenuItem searchItem = menu.findItem(R.id.id_search_only);
+		SearchView searchView = (SearchView) searchItem.getActionView();
+		
+		searchView.setOnQueryTextListener(this);
+		return true;	
+	}
+	
+	
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// TODO Auto-generated method stub
+		mAdapter.getFilter().filter(query);
+		return false;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		// TODO Auto-generated method stub
+		mAdapter.getFilter().filter(newText);
+		return false;
 	}
 	
 }

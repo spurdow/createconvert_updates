@@ -9,7 +9,7 @@ import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.Project;
 import com.createconvertupdates.iface.IAdapterActions;
 import com.createconvertupdates.iface.IImageDownload;
-import com.createconvertupdates.media.R;
+import com.createconvertupdates.medialtd.R;
 import com.createconvertupdates.tasks.BitmapDownloaderTask;
 import com.readystatesoftware.viewbadger.BadgeView;
 
@@ -153,7 +153,6 @@ public class ProjectListAdapter extends AbstractListAdapter<Project> implements 
 
 	@Override
 	public Filter getFilter() {
-		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		Filter filter = new Filter(){
 

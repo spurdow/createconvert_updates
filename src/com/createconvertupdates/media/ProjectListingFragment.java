@@ -31,6 +31,7 @@ import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.createconvertupdates.adapters.ProjectListAdapter;
 import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Project;
+import com.createconvertupdates.medialtd.R;
 
 public class ProjectListingFragment extends SherlockFragment implements OnItemClickListener, OnQueryTextListener {
 

@@ -7,6 +7,7 @@ import com.createconvertupdates.commons.AfterTextChanged;
 import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.iface.ISwipeGesture;
+import com.createconvertupdates.medialtd.R;
 import com.createconvertupdates.tasks.LoginTask;
 import com.createconvertupdates.tasks.RegisterTask;
 import com.google.android.gms.common.ConnectionResult;

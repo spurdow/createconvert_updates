@@ -50,6 +50,7 @@ import com.createconvertupdates.dbentities.ProjectHelper;
 import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.entities.MessageProject;
+import com.createconvertupdates.medialtd.R;
 import com.createconvertupdates.tasks.GCMRegIDTask;
 import com.createconvertupdates.tasks.SendMessageTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -220,6 +221,9 @@ public class HomeFragmentActivity extends SherlockFragmentActivity {
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.putExtra("activity_change", 0 );
 				startActivity(i);
+			break;
+		case R.id.id_settings: 
+				
 			break;
 		case R.id.id_compose: 
 			

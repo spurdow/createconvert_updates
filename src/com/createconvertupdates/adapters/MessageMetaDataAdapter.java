@@ -1,8 +1,10 @@
 package com.createconvertupdates.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,12 @@ import android.widget.Filter;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.createconvertupdates.dbentities.MessageHelper;
+import com.createconvertupdates.dbentities.MessageMetaDataHelper;
+import com.createconvertupdates.entities.Message;
 import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.iface.IAdapterActions;
-import com.createconvertupdates.media.R;
+import com.createconvertupdates.medialtd.R;
 
 public class MessageMetaDataAdapter extends AbstractListAdapter<MessageMetaData> implements IAdapterActions<MessageMetaData>{
 	
@@ -89,7 +94,58 @@ public class MessageMetaDataAdapter extends AbstractListAdapter<MessageMetaData>
 	@Override
 	public Filter getFilter() {
 		// TODO Auto-generated method stub
-		return null;
+		Filter filter = new Filter(){
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				// TODO Auto-generated method stub
+				Log.d("FILTERER", "Filtering Results " + constraint);
+				FilterResults filterResults = new FilterResults();
+				List<MessageMetaData> filteredList = new ArrayList<MessageMetaData>();
+				
+				
+				if(getList() == null ){
+					MessageMetaDataHelper helper = new MessageMetaDataHelper(getContext());
+					setList( helper.getAll(getList().get(0).getMessage_id()) );
+				}
+								
+				if(constraint == null || constraint.length() == 0){
+					MessageMetaDataHelper helper = new MessageMetaDataHelper(getContext());
+					setBackupList(helper.getAll(getList().get(0).getMessage_id()));
+					filterResults.count = getBackupList().size();
+					filterResults.values = getBackupList();
+				}else{
+					constraint = constraint.toString().toLowerCase();
+					List<MessageMetaData> l = getList();
+					for(int i =0 ; i < l.size() ; i++){
+						MessageMetaData m = l.get(i);
+						if(m.getContent().toString().toLowerCase().startsWith(constraint.toString()) ||
+							m.getDate().toString().toLowerCase().startsWith(constraint.toString())){
+							filteredList.add(m);
+						}
+						filterResults.count = filteredList.size();
+						filterResults.values  = filteredList;
+					}
+				}
+				return filterResults;
+				
+				
+
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			protected void publishResults(CharSequence constraint,
+					FilterResults results) {
+				// TODO Auto-generated method stub
+				setList((List<MessageMetaData>) results.values);
+				notifyDataSetChanged();
+				
+			}
+			
+		};
+		
+		return filter;
 	}
 	
 

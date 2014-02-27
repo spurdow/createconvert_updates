@@ -25,7 +25,7 @@ import com.createconvertupdates.media.HomeFragmentActivity;
 
 import static com.createconvertupdates.commons.Utilities.*;
 
-import android.R;
+import com.createconvertupdates.medialtd.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;

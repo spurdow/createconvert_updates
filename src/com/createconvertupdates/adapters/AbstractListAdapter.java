@@ -1,36 +1,34 @@
 package com.createconvertupdates.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
 import android.widget.Filterable;
 
 /**
- *  An abstract implementatio of list adapter to be used by all adapters
- *  Author : David Montecillo 
+ * An abstract implementatio of list adapter to be used by all adapters Author :
+ * David Montecillo
  */
-public abstract class AbstractListAdapter<E> extends BaseAdapter implements Filterable{
+public abstract class AbstractListAdapter<E> extends BaseAdapter implements
+		Filterable {
 
-	
 	private Context context;
-	private List<E> lists ;
+	private List<E> lists;
 	private List<E> backupList;
-	public AbstractListAdapter(Context context , List<E> lists){
+
+	public AbstractListAdapter(Context context, List<E> lists) {
 		this.context = context;
 		this.lists = lists;
 	}
-	
-	
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		if(lists == null) return 0;
+		if (lists == null)
+			return 0;
 		return lists.size();
 	}
 
@@ -49,34 +47,33 @@ public abstract class AbstractListAdapter<E> extends BaseAdapter implements Filt
 	@Override
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		// TODO Auto-generated method stub
-		return getOverridedView(arg0 , arg1, arg2);
+		return getOverridedView(arg0, arg1, arg2);
 	}
+
 	/**
-	 *  returns the Override view provided by its subclass
+	 * returns the Override view provided by its subclass
 	 */
-	public abstract View getOverridedView(int position , View child, ViewGroup root);
-	
-	
-	public Context getContext(){
+	public abstract View getOverridedView(int position, View child,
+			ViewGroup root);
+
+	public Context getContext() {
 		return context;
 	}
-	
-	public void setList(List<E> list){
+
+	public void setList(List<E> list) {
 		this.lists = list;
 	}
 
-	public void setBackupList(List<E> fList){
+	public void setBackupList(List<E> fList) {
 		this.backupList = fList;
 	}
-	
-	public List<E> getList(){
+
+	public List<E> getList() {
 		return lists;
 	}
-	
-	public List<E> getBackupList(){
+
+	public List<E> getBackupList() {
 		return backupList;
 	}
-	
-
 
 }

@@ -22,7 +22,7 @@ import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.entities.Customer;
 
 
-import android.R;
+import com.createconvertupdates.medialtd.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;

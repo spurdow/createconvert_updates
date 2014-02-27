@@ -17,6 +17,11 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
+import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.createconvertupdates.adapters.MessageMetaDataAdapter;
 import com.createconvertupdates.adapters.ProjectMetaDataAdapter;
 import com.createconvertupdates.commons.AfterTextChanged;
@@ -24,9 +29,10 @@ import com.createconvertupdates.commons.Utilities;
 import com.createconvertupdates.dbentities.MessageMetaDataHelper;
 import com.createconvertupdates.dbentities.ProjectMetaDataHelper;
 import com.createconvertupdates.entities.MessageMetaData;
+import com.createconvertupdates.medialtd.R;
 import com.createconvertupdates.tasks.SendMessageMetaDataTask;
 
-public class MessageFragment extends SherlockFragmentActivity {
+public class MessageFragment extends SherlockFragmentActivity implements OnQueryTextListener {
 
 	
 	private static final String TAG = MessageFragment.class.getName();
@@ -89,6 +95,7 @@ public class MessageFragment extends SherlockFragmentActivity {
 		mListView.setAdapter(mAdapter);
 		
 		mm_dh.close();
+		
 		
 		mBar = getSupportActionBar();
 		
@@ -159,5 +166,38 @@ public class MessageFragment extends SherlockFragmentActivity {
 		}
 		
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		//MenuInflater inflater = this.getSupportMenuInflater();
+		
+		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.search_only,  menu);
+		
+		MenuItem searchItem = menu.findItem(R.id.id_search_only);
+		SearchView searchView = (SearchView) searchItem.getActionView();
+		
+		searchView.setOnQueryTextListener(this);
+		return true;
+		
+	}
+	
+	
+	
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// TODO Auto-generated method stub
+		mAdapter.getFilter().filter(query);
+		return false;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		// TODO Auto-generated method stub
+		mAdapter.getFilter().filter(newText);
+		return false;
+	}
+	
 	
 }

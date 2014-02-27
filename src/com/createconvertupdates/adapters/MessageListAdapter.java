@@ -1,8 +1,10 @@
 package com.createconvertupdates.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +12,11 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.createconvertupdates.dbentities.MessageMetaDataHelper;
+import com.createconvertupdates.dbentities.MessageHelper;
 import com.createconvertupdates.entities.Message;
 import com.createconvertupdates.entities.MessageMetaData;
 import com.createconvertupdates.iface.IAdapterActions;
-import com.createconvertupdates.media.R;
+import com.createconvertupdates.medialtd.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 public class MessageListAdapter extends AbstractListAdapter<Message> implements IAdapterActions<Message>{
@@ -107,7 +109,57 @@ public class MessageListAdapter extends AbstractListAdapter<Message> implements 
 	@Override
 	public Filter getFilter() {
 		// TODO Auto-generated method stub
-		return null;
+		Filter filter = new Filter(){
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				// TODO Auto-generated method stub
+				Log.d("FILTERER", "Filtering Results " + constraint);
+				FilterResults filterResults = new FilterResults();
+				List<Message> filteredList = new ArrayList<Message>();
+				
+				
+				if(getList() == null ){
+					MessageHelper helper = new MessageHelper(getContext());
+					setList( helper.getAll() );
+				}
+								
+				if(constraint == null || constraint.length() == 0){
+					MessageHelper helper = new MessageHelper(getContext());
+					setBackupList(helper.getAll());
+					filterResults.count = getBackupList().size();
+					filterResults.values = getBackupList();
+				}else{
+					constraint = constraint.toString().toLowerCase();
+					List<Message> l = getList();
+					for(int i =0 ; i < l.size() ; i++){
+						Message m = l.get(i);
+						if(m.getHeader().toString().toLowerCase().startsWith(constraint.toString())){
+							filteredList.add(m);
+						}
+						filterResults.count = filteredList.size();
+						filterResults.values  = filteredList;
+					}
+				}
+				return filterResults;
+				
+				
+
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			protected void publishResults(CharSequence constraint,
+					FilterResults results) {
+				// TODO Auto-generated method stub
+				setList((List<Message>) results.values);
+				notifyDataSetChanged();
+				
+			}
+			
+		};
+		
+		return filter;
 	}
 
 }

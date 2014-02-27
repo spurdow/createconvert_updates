@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.createconvertupdates.media;
+package com.createconvertupdates.medialtd;
 
 public final class Manifest {
     public static final class permission {

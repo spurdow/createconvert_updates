@@ -26,7 +26,7 @@ import com.createconvertupdates.entities.Customer;
 import com.createconvertupdates.entities.Message;
 import com.createconvertupdates.entities.MessageMetaData;
 
-import android.R;
+import com.createconvertupdates.medialtd.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;

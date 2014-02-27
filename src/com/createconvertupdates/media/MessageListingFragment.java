@@ -17,14 +17,20 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
+import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.createconvertupdates.adapters.MessageListAdapter;
 import com.createconvertupdates.adapters.MessageMetaDataAdapter;
 import com.createconvertupdates.dbentities.MessageHelper;
 import com.createconvertupdates.dbentities.MessageMetaDataHelper;
 import com.createconvertupdates.entities.Message;
 import com.createconvertupdates.entities.MessageMetaData;
+import com.createconvertupdates.medialtd.R;
 
-public class MessageListingFragment extends SherlockFragment implements OnItemClickListener {
+public class MessageListingFragment extends SherlockFragment implements OnItemClickListener, OnQueryTextListener {
 
 	
 	public static final String TAG = "MessageListingFragment" ;
@@ -40,6 +46,7 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		this.setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.list_layout , container, false);
 	}
 
@@ -81,6 +88,24 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 		startActivity(i);
 		
 	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		//MenuInflater inflater = this.getSupportMenuInflater();
+		
+		inflater.inflate(R.menu.home_page_menu, menu);
+		
+		MenuItem searchItem = menu.findItem(R.id.id_search);
+		SearchView searchView = (SearchView) searchItem.getActionView();
+		
+		searchView.setOnQueryTextListener(this);
+		
+
+		
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+	
 	
 	@Override
 	public void onPause() {
@@ -134,6 +159,22 @@ public class MessageListingFragment extends SherlockFragment implements OnItemCl
 		}
 		
 	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// TODO Auto-generated method stub
+		adapter.getFilter().filter(query);
+		return false;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		// TODO Auto-generated method stub
+		adapter.getFilter().filter(newText);
+		return false;
+	}
+	
+	
 	
 
 	

@@ -1,0 +1,53 @@
+[33mcommit 3a887fe7f5aa514b7604c4414c45058f02647d20[m
+Author: montecillodavid <montecillodavid@gmail.com>
+Date:   Wed Feb 26 23:29:40 2014 +0800
+
+    update binaries
+
+[1mdiff --git a/AndroidManifest.xml b/AndroidManifest.xml[m
+[1mindex 3a265ea..200ff53 100644[m
+[1m--- a/AndroidManifest.xml[m
+[1m+++ b/AndroidManifest.xml[m
+[36m@@ -22,7 +22,7 @@[m
+         android:allowBackup="true"[m
+         android:icon="@drawable/ic_launcher"[m
+         android:label="@string/app_name"[m
+[31m-        android:theme="@style/Theme.Createconvert" android:debuggable="true">[m
+[32m+[m[32m        android:theme="@style/Theme.Createconvert" >[m
+         <activity android:name="HomeFragmentActivity" android:theme="@style/Theme.Createconvert" android:label="HomePage" android:uiOptions="splitActionBarWhenNarrow"></activity><activity[m
+             android:name="com.createconvertupdates.media.SplashActivity"[m
+             android:label="@string/app_name" >[m
+[1mdiff --git a/bin/AndroidManifest.xml b/bin/AndroidManifest.xml[m
+[1mindex 3a265ea..200ff53 100644[m
+[1m--- a/bin/AndroidManifest.xml[m
+[1m+++ b/bin/AndroidManifest.xml[m
+[36m@@ -22,7 +22,7 @@[m
+         android:allowBackup="true"[m
+         android:icon="@drawable/ic_launcher"[m
+         android:label="@string/app_name"[m
+[31m-        android:theme="@style/Theme.Createconvert" android:debuggable="true">[m
+[32m+[m[32m        android:theme="@style/Theme.Createconvert" >[m
+         <activity android:name="HomeFragmentActivity" android:theme="@style/Theme.Createconvert" android:label="HomePage" android:uiOptions="splitActionBarWhenNarrow"></activity><activity[m
+             android:name="com.createconvertupdates.media.SplashActivity"[m
+             android:label="@string/app_name" >[m
+[1mdiff --git a/bin/CreateConvertUpdates.apk b/bin/CreateConvertUpdates.apk[m
+[1mindex a92da51..c5bd55a 100644[m
+Binary files a/bin/CreateConvertUpdates.apk and b/bin/CreateConvertUpdates.apk differ
+[1mdiff --git a/bin/classes.dex b/bin/classes.dex[m
+[1mindex 28b1a07..11515ef 100644[m
+Binary files a/bin/classes.dex and b/bin/classes.dex differ
+[1mdiff --git a/bin/dexedLibs/actionbarsherlock-f3d3f0febc34e2eca66c96bc1ca0000d.jar b/bin/dexedLibs/actionbarsherlock-f3d3f0febc34e2eca66c96bc1ca0000d.jar[m
+[1mindex b54e659..9e0a847 100644[m
+Binary files a/bin/dexedLibs/actionbarsherlock-f3d3f0febc34e2eca66c96bc1ca0000d.jar and b/bin/dexedLibs/actionbarsherlock-f3d3f0febc34e2eca66c96bc1ca0000d.jar differ
+[1mdiff --git a/bin/dexedLibs/android-support-v4-869e126d97ac9856e290ba0442c4a1f8.jar b/bin/dexedLibs/android-support-v4-869e126d97ac9856e290ba0442c4a1f8.jar[m
+[1mindex c8a6767..f14d294 100644[m
+Binary files a/bin/dexedLibs/android-support-v4-869e126d97ac9856e290ba0442c4a1f8.jar and b/bin/dexedLibs/android-support-v4-869e126d97ac9856e290ba0442c4a1f8.jar differ
+[1mdiff --git a/bin/dexedLibs/google-play-services-01494a45ec88b7fbb1bb786b93cde862.jar b/bin/dexedLibs/google-play-services-01494a45ec88b7fbb1bb786b93cde862.jar[m
+[1mindex 69b8e1b..6ac9949 100644[m
+Binary files a/bin/dexedLibs/google-play-services-01494a45ec88b7fbb1bb786b93cde862.jar and b/bin/dexedLibs/google-play-services-01494a45ec88b7fbb1bb786b93cde862.jar differ
+[1mdiff --git a/bin/dexedLibs/google-play-services_lib-7d02346a6c485f4c5dde760e1da9ed83.jar b/bin/dexedLibs/google-play-services_lib-7d02346a6c485f4c5dde760e1da9ed83.jar[m
+[1mindex fa1e3b7..072143f 100644[m
+Binary files a/bin/dexedLibs/google-play-services_lib-7d02346a6c485f4c5dde760e1da9ed83.jar and b/bin/dexedLibs/google-play-services_lib-7d02346a6c485f4c5dde760e1da9ed83.jar differ
+[1mdiff --git a/bin/resources.ap_ b/bin/resources.ap_[m
+[1mindex bb66206..25685ca 100644[m
+Binary files a/bin/resources.ap_ and b/bin/resources.ap_ differ
