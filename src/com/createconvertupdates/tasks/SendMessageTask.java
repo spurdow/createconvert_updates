@@ -160,7 +160,7 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 		    		LocalBroadcastManager.getInstance(this.mContext).sendBroadcast(i);
 					
 		    		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-					builder.setIcon(R.drawable.btn_plus)
+					builder.setIcon(android.R.drawable.btn_plus)
 					.setTitle("Message Sent!")
 					.setMessage(tag_message);
 					AlertDialog dialog = builder.create();
@@ -178,7 +178,7 @@ public class SendMessageTask extends AsyncTask<String , String , String>{
 					dialog.show();
 				}else{
 					AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-					builder.setIcon(R.drawable.btn_plus)
+					builder.setIcon(android.R.drawable.btn_plus)
 					.setTitle("Message Failed!")
 					.setMessage(tag_message);
 					AlertDialog dialog = builder.create();

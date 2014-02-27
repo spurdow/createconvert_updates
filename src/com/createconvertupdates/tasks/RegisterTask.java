@@ -84,7 +84,7 @@ public class RegisterTask extends AsyncTask<String , String, String> {
 			}else if(tag_result.trim().equals("success")){
 				parent.dismiss();
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setIcon(R.drawable.btn_plus)
+				builder.setIcon(android.R.drawable.btn_plus)
 				.setTitle("Registration Success")
 				.setMessage("We have sent you an email to fully register to our Project Updates.");
 				AlertDialog dialog = builder.create();
