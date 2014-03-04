@@ -80,7 +80,6 @@ public class GcmIntentService extends IntentService {
             	 *  generate notification only if notify is not null 
             	 *  and notify is true
             	 */
-            	Log.d(TAG, "someting");
 
             	if(extras.getString("notify") != null && Boolean.valueOf(extras.getString("notify"))){
 	            	if(extras.getString("notification_id") != null){
