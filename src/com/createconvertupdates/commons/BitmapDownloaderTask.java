@@ -22,8 +22,6 @@ public class BitmapDownloaderTask extends AsyncTask<String , Void , Bitmap>{
 
 	}
 	
-	
-	
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub

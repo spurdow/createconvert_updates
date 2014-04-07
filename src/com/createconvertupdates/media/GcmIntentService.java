@@ -103,7 +103,6 @@ public class GcmIntentService extends IntentService {
 	private void generateNotification(int notification_id , Bundle extras){
 		mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		if(extras == null) return;
-		Log.d("BOANG", "BOANG");
 		if(extras.getString("notify") == null) return;
 		
 		switch(notification_id){
